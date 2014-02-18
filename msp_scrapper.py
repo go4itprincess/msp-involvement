@@ -23,7 +23,7 @@ while (len(source) > 0):
 		party = source[:source.index("</p>")].replace('\n','').replace('\t','')
 		
 		source = source[source.index("<strong>") + 44:]
-		constituencies = source[:source.index("</strong>")].replace(" and ", ";").replace('\n','').replace('\t','')
+		constituencies = source[:source.index("</strong>")].replace('\n','').replace('\t','')
 
 		current_msp += name + ";" + party + ";" + constituencies + ";" + image + "\n"
 
