@@ -32,15 +32,15 @@ for constituency in constituencies.values():
         for p in point:
             p = p.split('.')
             p[1] = p[1][:4]
-            points.append('.'.join(p))
+            points.append(float('.'.join(p)))
 
-        polygons.append(','.join(points))
+        polygons.append(points)
 
 
     output.append({"name":name,"id":id,"polygon":polygons})
     print name
 
-fo = open("../data/polygons_clean.js", "w+")
+fo = open("../data/polygons_clean_floats.js", "w+")
 fo.write(json.dumps(output))
 fo.close()
 
