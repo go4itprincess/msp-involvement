@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Layout</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+
+	<style type="text/css">
+        body {
+	   
+            margin: 20px;
+            padding: 0;
+	    height:auto;
+	    background: -webkit-linear-gradient(#99FFCC, #FFFF99); /* For Safari */
+	    background: -o-linear-gradient(#99FFCC, ##FFFF99); /* For Opera 11.1 to 12.0 */
+	    background: -moz-linear-gradient(#99FFCC, #FFFF99); /* For Firefox 3.6 to 15 */
+      	    background: linear-gradient(#99FFCC, #FFFF99); /* Standard syntax */
+	    background-repeat: no-repeat;
+	    background-color: #FFFF99;
+	}
+	
+	#title {
+	    position: relative;
+	    text-align: center;
+	}
+
+        #list {
+            position: relative;
+            margin-right: 1000px;
+	    border:2px solid;
+	    border-radius:25px;
+	    box-shadow: 10px 10px 5px gray;
+	    padding: 12px;
+	    text-align: right;
+	    background-color: white;
+
+        }
+
+        #map {
+            float: right;
+            position: relative;
+            text-align: left;
+            width: 980px;
+            height: 500px;
+            background-color: grey;
+        }
+    </style>
+</head>
+<body>
+<h1 id="title">Random title</h1>
+<div id="map">
+    Map
+</div>
+<div id="list">
+  Get heat map accoring to:<br><br>
+   <span id="Overall SIMD score" class="listitem">Overall SIMD score</span><br>
+   <span id="Crime">Crime</span><br>
+   <span id="Access" class="listitem">Access</span><br>
+   <span id="Housing" class="listitem">Housing</span><br>
+   <span id="Education" class="listitem">Education</span><br>
+   <span id="Health" class="listitem">Health</span><br>
+   <span id="Employment" class="listitem">Employment</span><br>
+   <span id="Income" class="listitem">Income</span>
+</div>
+<script src="map.js"></script>
+</body>
+</html>

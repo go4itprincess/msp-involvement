@@ -13,7 +13,7 @@ while (len(source) > 0):
 		source = source[source.index("<a href=\"/msps/currentmsps/"):]
 		source = source[source.index("<strong>") + 58:]
 		
-		name = source[:source.index("</strong>")].replace(',', '').replace('\n','').replace('\t','')
+		name = source[:source.index("</strong>")].replace('\n','').replace('\t','')
 
 		source = source[source.index("src=") + 5:]
 		image = "http://www.scottish.parliament.uk" + source[:source.index("\"")]
@@ -23,14 +23,14 @@ while (len(source) > 0):
 		party = source[:source.index("</p>")].replace('\n','').replace('\t','')
 		
 		source = source[source.index("<strong>") + 44:]
-		constituencies = source[:source.index("</strong>")].replace(',', ';').replace(" and ", ";").replace('\n','').replace('\t','')
+		constituencies = source[:source.index("</strong>")].replace('\n','').replace('\t','')
 
-		current_msp += name + "," + party + "," + constituencies + "," + image + "\n"
+		current_msp += name + ";" + party + ";" + constituencies + ";" + image + "\n"
 
 	else:
 		break;
 
-fo = open("current_msp.csv", "w+")
+fo = open("current_msps.csv", "w+")
 fo.write(current_msp)
 fo.close()
 
