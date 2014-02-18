@@ -4,18 +4,23 @@ import urllib2
 
 twfy = TWFY.TWFY('B7Ben2G9Zu2kCnRUEwFzJLea')
 
-constituencies = json.loads(twfy.api.getConstituencies(output='js',date='05/05/2012'), 'iso-8859-1')
+url = "http://mapit.mysociety.org/areas/SPC"
+req = urllib2.Request(url)
+constituencies_string = urllib2.urlopen(req).read()
 
-for constituency in constituencies:
-    name =  constituency['name']
+constituencies = json.loads(constituencies_string, 'iso-8859-1')
 
-    url = "http://www.theyworkforyou.com/api/getBoundary?key=B7Ben2G9Zu2kCnRUEwFzJLea&name=" + name
+for constituency in constituencies.values():
+    id =  constituency['id']
+    name = constituency['name']
+
+    url = "http://mapit.mysociety.org/area/" + id + ".kml"
     req = urllib2.Request(url)
     polygon = urllib2.urlopen(req).read()
 
     try:
-        fo = open("polygones/" + name + ".kml", "w+")
-        fo.write(current_msp)
+        fo = open("polygons_Scotland/" + name + ".kml", "w+")
+        fo.write(polygon)
         fo.close()
     except:
         print "Ouch"
