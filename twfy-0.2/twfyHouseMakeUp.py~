@@ -10,19 +10,38 @@ constituencies_string = urllib2.urlopen(req).read()
 
 constituencies = json.loads(constituencies_string, 'iso-8859-1')
 
+output = []
+
 for constituency in constituencies.values():
     id =  constituency['id']
     name = constituency['name']
 
-    url = "http://mapit.mysociety.org/area/" + id + ".kml"
+    url = "http://mapit.mysociety.org/area/" + str(id) + ".kml"
     req = urllib2.Request(url)
     polygon = urllib2.urlopen(req).read()
 
-    try:
-        fo = open("polygons_Scotland/" + name + ".kml", "w+")
-        fo.write(polygon)
-        fo.close()
-    except:
-        print "Ouch"
+    polygon = polygon[polygon.index("<coordinates>")+13:]
+    polygon = polygon[:polygon.index("<")].split(' ')
+
+    polygons = []
+
+    for point in polygon:
+        point = point.split(',')[:2]
+	points = []
+
+        for p in point:
+            p = p.split('.')
+            p[1] = p[1][:4]
+            points.append('.'.join(p))
+
+        polygons.append(','.join(points))
+
+
+    output.append({"name":name,"id":id,"polygon":polygons})
+    print name
+
+fo = open("../data/polygons_clean.js", "w+")
+fo.write(json.dumps(output))
+fo.close()
 
 print "Done!"

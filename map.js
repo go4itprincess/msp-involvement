@@ -1,2 +1,8 @@
-var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
-    .setView([40, -74.50], 9);
+// create a map in the "map" div, set the view to a given place and zoom
+var map = L.map('map').setView([56.834, -3.994], 7);
+
+// add an OpenStreetMap tile layer
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
