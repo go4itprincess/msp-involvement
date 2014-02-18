@@ -41,7 +41,8 @@ API = {'api':{
        'getWrans':[('output',), ('date', 'search', 'person', 'gid', 'order', 'page', 'num')],
        'getWMS':[('output',), ('date', 'search', 'person', 'gid', 'order', 'page', 'num')],
        'getHansard':[('output',), ('search', 'person', 'order', 'page', 'num')],
-       'getComments':[('output',), ('date', 'search', 'user_id', 'pid', 'page', 'num')]} 
+       'getBoundary':[('output',), ('name')],
+       'getComments':[('output',), ('date', 'search', 'user_id', 'pid', 'page', 'num')]}
         }
 
 OUTPUTS = ['xml', 'php', 'js', 'rabx']
@@ -57,7 +58,7 @@ class TWFY():
         # this enables 'twfy.getMP()', for example
         for prefix, methods in API.items():
             setattr(self, prefix, TWFYAPICategory(self, prefix, methods))
-       
+
     def get(self, **params):
         """
         Calls the twfy API
@@ -73,7 +74,7 @@ class TWFYAPICategory:
     TWFYAPICategory is a modified version of RTMAPICategory in pyrtm (http://repo.or.cz/w/pyrtm.git)
     See the `API` structure and `TWFY.__init__`
     """
-   
+
     def __init__(self, twfy, prefix, methods):
         self.twfy = twfy
         self.prefix = prefix
@@ -98,15 +99,15 @@ class TWFYAPICategory:
             for param in params:
                 if param not in rargs + oargs:
                     raise TypeError, 'Invalid parameter (%s)' % param
-            
+
             if 'type' in params:
                 if params['type'] not in TYPES:
                     raise TypeError, 'Invalid type given: (%s)' % params['type']
-                
+
             if 'date' in params:
                 if not is_valid_date(params['date']):
                     raise TypeError, 'Invalid date given: (%s)' % params['date']
-                
+
             return self.twfy.get(method=aname, **params)
         else:
             raise TypeError, 'Invalid output given: (%s)' % params['output']
