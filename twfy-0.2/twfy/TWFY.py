@@ -16,6 +16,12 @@ A library that provides a python binding to the TWFY API(http://www.theyworkfory
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+Modifications by danielduma@gmail.com:
+    added "scotland" to TYPES
+    fixed getMPInfo tuple
+
 '''
 import datetime
 import time
@@ -27,8 +33,8 @@ API = {'api':{
        'getConstituency':[('output', 'postcode',), ()],
        'getConstituencies':[('output',), ('date', 'search', 'latitude', 'longitude', 'distance')],
        'getMP':[('output',), ('postcode', 'constituency', 'id', 'always_return')],
-       'getMPInfo':[('output', 'id',), ('fields')],
-       'getMPsInfo':[('output', 'id',), ('fields')],
+       'getMPInfo':[('output', 'id',), ('fields',)],
+       'getMPsInfo':[('output', 'id',), ('fields',)],
        'getMPs':[('output',), ('date', 'party', 'search')],
        'getLord':[('output', 'id',), ()],
        'getLords':[('output',), ('date', 'party', 'search')],
@@ -41,13 +47,14 @@ API = {'api':{
        'getWrans':[('output',), ('date', 'search', 'person', 'gid', 'order', 'page', 'num')],
        'getWMS':[('output',), ('date', 'search', 'person', 'gid', 'order', 'page', 'num')],
        'getHansard':[('output',), ('search', 'person', 'order', 'page', 'num')],
-       'getBoundary':[('output',), ('name')],
+       'getBoundary':[('output',), ('name',)],
+       'getPerson':[('output',), ('id',)],
        'getComments':[('output',), ('date', 'search', 'user_id', 'pid', 'page', 'num')]}
         }
 
 OUTPUTS = ['xml', 'php', 'js', 'rabx']
 SERVICE_URL = 'http://www.theyworkforyou.com/api/'
-TYPES = ['commons', 'westminsterhall', 'lords']
+TYPES = ['commons', 'westminsterhall', 'lords', 'scotland']
 
 class TWFY():
     """
