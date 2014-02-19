@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+<script src="lib/d3/d3.js"></script>
+<script src="lib/d3.layout.cloud.js"></script>
+<script>
+
+$.getJSON( "msps_words.json", function( data ) {
+    var items = [];
+
+    for(i=0;i<data[0].top_words.length;i++){
+    // $.each( data[0].top_words, function(  value ) {
+      // tuple[1] = tuple[1] * 10000;
+      data[0].top_words[i][1] = (data[0].top_words[i][1] * 90) + 12;
+    // });
+    };
+
+    // console.log(data);
+
+
+  var fill = d3.scale.category20();
+
+  d3.layout.cloud().size([500, 500])
+      .words(
+        data[0].top_words.map(function(d){return {text: d[0], size: d[1]};}))
+        // [
+        // "Hello", "world", "normally", "you", "want", "more", "words",
+        // "than", "this"].map(function(d) {
+        // return {text: d, size: 10 + Math.random() * 90};})
+        // )
+      .padding(5)
+      .rotate(function() { return 0 /*~~(Math.random() * 2) * 90;*/ })
+      .font("Impact")
+      .fontSize(function(d) { return d.size; })
+      .on("end", draw)
+      .start();
+
+  function draw(words) {
+    d3.select("body").append("svg")
+        .attr("width", 500)
+        .attr("height", 500)
+      .append("g")
+        .attr("transform", "translate(150,150)")
+      .selectAll("text")
+        .data(words)
+      .enter().append("text")
+        .style("font-size", function(d) { return d.size + "px"; })
+        .style("font-family", "Impact")
+        .style("fill", function(d, i) { return fill(i); })
+        .attr("text-anchor", "middle")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        })
+        .text(function(d) { return d.text; });
+  }
+
+
+      });
+</script>
