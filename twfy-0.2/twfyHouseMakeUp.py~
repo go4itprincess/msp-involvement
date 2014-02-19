@@ -34,7 +34,12 @@ for constituency in constituencies.values():
             p[1] = p[1][:4]
             points.append(float('.'.join(p)))
 
-        polygons.append(points)
+	t = points[0]
+	points[0] = points[1]
+	points[1] = t
+
+	if len(polygons)%10 == 0:
+             polygons.append(points)
 
 
     output.append({"name":name,"id":id,"polygon":polygons})

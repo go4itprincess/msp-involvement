@@ -24,6 +24,7 @@ for constituency in constituencies.values():
     polygon = polygon[:polygon.index("<")].split(' ')
 
     polygons = []
+    i = 0
 
     for point in polygon:
         point = point.split(',')[:2]
@@ -38,8 +39,9 @@ for constituency in constituencies.values():
 	points[0] = points[1]
 	points[1] = t
 
-        polygons.append(points)
-
+	if i% 10 == 0:
+             polygons.append(points)
+	i+=1
 
     output.append({"name":name,"id":id,"polygon":polygons})
     print name
