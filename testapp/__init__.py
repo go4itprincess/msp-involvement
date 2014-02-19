@@ -5,7 +5,16 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return 'asdfadf'
+    return app.send_static_file('index.html')
+
+@app.route("/<filename>.css")
+def get_css(filename):
+    return app.send_static_file(filename + '.css')
+
+
+@app.route("/<filename>.js")
+def get_js(filename):
+    return app.send_static_file(filename + '.js')
 
 
 @app.route("/constituency/<string:constituency>")
