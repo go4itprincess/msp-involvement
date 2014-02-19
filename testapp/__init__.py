@@ -26,7 +26,13 @@ def const_info(constituency):
             m.surname,
             m.party,
             m.url,
-            SUM(d.rank2004+d.rank2006*4+d.rank2009*15+d.rank2012*30)/COUNT(*)/50/6505*100 AS rank
+            SUM(d.rank2004+d.rank2006*4+d.rank2009*15+d.rank2012*30)/COUNT(*)/50/6505*100 AS rank,
+            m.total_interventions,
+            m.avg_intervention_len,
+            m.total_mentions_of_constituency,
+            m.interventions_with_mention,
+            m.mentions_percentage_of_total_text,
+            m.percentage_of_interventions_with_mention
         FROM constituencies c
         LEFT JOIN MSPs m ON c.name=m.constituency
         LEFT JOIN datazones d ON c.id = d.constituency
@@ -42,7 +48,13 @@ def const_info(constituency):
             'surname': row[0][1],
             'party': row[0][2],
             'url': row[0][3],
-            'rank_c': row[0][4] 
+            'rank_c': row[0][4],
+            'total_interventions': row[0][5],
+            'avg_intervention_len': row[0][6],
+            'total_mentions_of_constituency': row[0][7],
+            'interventions_with_mention' : row[0][8],
+            'mentions_percentage_of_total_text': row[0][9],
+            'percentage_of_interventions_with_mention': row[0][10]
         }
         result += [msp]
         row = r.fetch_row()
