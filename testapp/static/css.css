@@ -82,7 +82,6 @@
 
 
 body {
-	margin: 20px;
 	padding: 0;
 	height:auto;
 	background: -webkit-linear-gradient(#EEEEFF, #FFFFFF); /* For Safari */
@@ -91,71 +90,54 @@ body {
 	background: linear-gradient(#EEEEFF, #FFFFFF); /* Standard syntax */
 	background-repeat: no-repeat;
 	background-color: #FFFFFF;
-}
+	}
 
 
 #map {
-        position: relative;
-	height: 570px;
-}
+	position: relative;
+	min-height:500px;
+	height: 90%;
+	}
 
 #buttons {
-       margin-left: 80px;
-       z-index: 100;
-       position: absolute;
-       align:top;
-}
+    margin-left: 80px;
+    z-index: 100;
+    position: absolute;
+    align:top;
+	}
 
-#searchthing {
-       background-image: url(http://www.clker.com/cliparts/W/q/C/c/Z/A/speech-bubble.svg)
-       margin-left: 950px;
-       margin-top: 40px;
-       height: 85px;
-       width: 150px;
-       animation:slidein 3s;
-       -webkit-animation: slidein 3s;
-}
-
-@-webkit-keyframes slidein {
-  from {
-      margin-left: 10000px;
-  }
-
-  to {
-   margin-left: 950px;
-   margin-top: 40px;
-  }
-}
-
-@keyframes slidein {
-  from {
-    margin-left: 10000px;
-  
-  }
-
-  to {
-   margin-left: 950px;
-   margin-top: 40px;
-  }
-}
-
-#magnifier {
-    position: relative;
-    left: 50px;
-    top: 20px;
-}
-
+<<<<<<< HEAD
 #bubble {
-    position: relative;
-    top: 0;
-    left: 0;
+    position: absolute;
+    margin-left: 950px;
+    margin-top: 40px;
     
 }
 
 #searchbar {
-    position: absolute;
+    position: relative;
     z-index: 100;
-    top: 0;
-    left: 0
+    margin-left: 950px;
+    margin-top: 40px;
 }
 
+=======
+.search-wrapper {
+	position: fixed;
+	right: -70px;
+	}
+	
+.search-wrapper:hover {
+	right: 70px;
+	}
+	
+#search-box {
+	position: relative;
+	left: 35px;
+	top: -30px;
+	}
+
+#searchbar {
+	width: 100px;
+	}
+>>>>>>> 73156c2c4a0009ac9d7c8715658e6fff3bd17235
