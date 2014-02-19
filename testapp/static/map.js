@@ -25,14 +25,11 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a 
 
 
 var geojson = L.geoJson(constituencies, {
-    //style: style,
-    //onEachFeature: onEachFeature
+    style: style,
+    onEachFeature: onEachFeature
 }).addTo(map);
 
 
-
-
-/*
 // control that shows state info on hover
 var info = L.control();
 
@@ -42,10 +39,8 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Population</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + props.population + ' people'
-        : 'Hover over a constituency');
+info.update = function (results) {
+    if (results.length) {this._div.innerHTML = results;}
 };
 
 info.addTo(map);
@@ -72,7 +67,7 @@ function style(feature) {
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7,
-        fillColor: getColor(feature.properties.population)
+        fillColor: getColor(feature.properties.population/1000)
     };
 }
 
@@ -89,8 +84,12 @@ function highlightFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera) {
         layer.bringToFront();
     }
+    constituency = layer.feature.properties.name
+    $.ajax({url:"/constituency/" + constituency, success: function(result) {
+        info.update(results);
+        }
+    });
 
-    info.update(layer.feature.properties);
 }
 
 
@@ -100,7 +99,7 @@ function resetHighlight(e) {
     info.update();
 }
 
-function zoomToFeature(e) {
+function onClick(e) {
     map.fitBounds(e.target.getBounds());
 }
 
@@ -108,7 +107,7 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: zoomToFeature
+        click: onClick
     });
 }
 
@@ -137,4 +136,3 @@ legend.onAdd = function (map) {
 };
 
 legend.addTo(map);
-*/
