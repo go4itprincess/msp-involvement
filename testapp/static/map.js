@@ -1,6 +1,6 @@
 var map = L.map('map', {
         center: L.latLng(56.834, -3.994),
-        zoom: 7,
+        zoom: 6,
         minZoom: 5
         });
 map.setMaxBounds(L.latLngBounds(L.latLng(50.0,-20.0),L.latLng(65.0,15.0)));
@@ -9,10 +9,10 @@ map.setMaxBounds(L.latLngBounds(L.latLng(50.0,-20.0),L.latLng(65.0,15.0)));
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-var constituencies = [];
-var polygons = [];
+//var constituencies = [];
+//var polygons = [];
 
-$.getJSON("constituencies_polygons.js", function (data) {
+/*$.getJSON("constituencies_polygons.js", function (data) {
 	constituencies = data;
 	console.log(constituencies[0].polygon);
 	for(var i = 0; i<Object.keys(constituencies).length; i++){
@@ -20,16 +20,16 @@ $.getJSON("constituencies_polygons.js", function (data) {
 		polygons[i].bindPopup("<b>" + constituencies[i].name + "</b>")
 	}
 });
+*/
 
 
 
+var geojson = L.geoJson(constituencies, {
+    style: style,
+    onEachFeature: onEachFeature
+}).addTo(map);
 
 
-
-
-
-
-/*
 // control that shows state info on hover
 var info = L.control();
 
@@ -39,25 +39,25 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Population</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + props.population + ' people'
-        : 'Hover over a constituency');
+info.update = function (results) {
+    if (results.length) {this._div.innerHTML = results;}
 };
 
 info.addTo(map);
 
 
-// get color depending on population value
+// get color depending on percentage value
 function getColor(d) {
-    return d > 1000 ? '#800026' :
-           d > 500  ? '#BD0026' :
-           d > 200  ? '#E31A1C' :
-           d > 100  ? '#FC4E2A' :
-           d > 50   ? '#FD8D3C' :
-           d > 20   ? '#FEB24C' :
-           d > 10   ? '#FED976' :
-                      '#FFEDA0';
+    return d > 90  ? '#800026' :
+           d > 80  ? '#BD0026' :
+           d > 70  ? '#E31A1C' :
+           d > 60  ? '#FC4E2A' :
+           d > 50  ? '#FD8D3C' :
+           d > 40  ? '#FEB24C' :
+           d > 30  ? '#FED976' :
+           d > 20  ? '#FED976' :
+           d > 10  ? '#FED976' :
+                     '#FFEDA0';
 }
 
 function style(feature) {
@@ -67,7 +67,7 @@ function style(feature) {
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7,
-        fillColor: getColor(feature.properties.density)
+        fillColor: getColor(feature.properties.population/1000)
     };
 }
 
@@ -84,18 +84,22 @@ function highlightFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera) {
         layer.bringToFront();
     }
+    constituency = layer.feature.properties.name
+    $.ajax({url:"/constituency/" + constituency, success: function(result) {
+        info.update(results);
+        }
+    });
 
-    info.update(layer.feature.properties);
 }
 
-var geojson;
+
 
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
     info.update();
 }
 
-function zoomToFeature(e) {
+function onClick(e) {
     map.fitBounds(e.target.getBounds());
 }
 
@@ -103,14 +107,10 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: zoomToFeature
+        click: onClick
     });
 }
 
-geojson = L.geoJson(statesData, {
-    style: style,
-    onEachFeature: onEachFeature
-}).addTo(map);
 
 
 var legend = L.control({position: 'bottomright'});
@@ -118,7 +118,7 @@ var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+        grades = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         labels = [],
         from, to;
 
@@ -136,5 +136,3 @@ legend.onAdd = function (map) {
 };
 
 legend.addTo(map);
-
-*/
