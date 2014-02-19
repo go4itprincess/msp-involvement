@@ -36,7 +36,7 @@ def const_info(constituency):
         FROM constituencies c
         LEFT JOIN MSPs m ON c.name=m.constituency
         LEFT JOIN datazones d ON c.id = d.constituency
-        WHERE c.name="Ayr"
+        WHERE c.name="{constituency}"
         GROUP BY c.id
     """.format(constituency=constituency))
     r = db.use_result()
