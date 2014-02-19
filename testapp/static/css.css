@@ -96,7 +96,7 @@ body {
 
 #map {
         position: relative;
-	height: 500px;
+	height: 570px;
 }
 
 #buttons {
@@ -107,31 +107,55 @@ body {
 }
 
 #searchthing {
-       animation:myfirst 5s;
-       -webkit-animation: slidein 5s;
+       background-image: url(http://www.clker.com/cliparts/W/q/C/c/Z/A/speech-bubble.svg)
+       margin-left: 950px;
+       margin-top: 40px;
+       height: 85px;
+       width: 150px;
+       animation:slidein 3s;
+       -webkit-animation: slidein 3s;
 }
 
 @-webkit-keyframes slidein {
   from {
-    margin-left: 100%;
-    width: 300%; 
+      margin-left: 10000px;
   }
 
   to {
-    margin-left: 0%;
-    width: 100%;
+   margin-left: 950px;
+   margin-top: 40px;
   }
 }
 
 @keyframes slidein {
   from {
-    margin-left: 100%;
-    width: 300%; 
+    margin-left: 10000px;
+  
   }
 
   to {
-    margin-left: 0%;
-    width: 100%;
+   margin-left: 950px;
+   margin-top: 40px;
   }
+}
+
+#magnifier {
+    position: relative;
+    left: 50px;
+    top: 20px;
+}
+
+#bubble {
+    position: relative;
+    top: 0;
+    left: 0;
+    
+}
+
+#searchbar {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0
 }
 
