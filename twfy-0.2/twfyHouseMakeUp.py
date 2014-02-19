@@ -21,7 +21,7 @@ for constituency in constituencies.values():
     url = "http://mapit.mysociety.org/area/" + str(id) + ".kml"
     req = urllib2.Request(url)
 
-    polygons_scraped = re.findall("<coordinates>(.*)</coordinates>",urllib2.urlopen(req).read())
+    polygons_scraped = re.findall("<coordinates>(.+?)</coordinates>",urllib2.urlopen(req).read())
 
     polygons = []
 
