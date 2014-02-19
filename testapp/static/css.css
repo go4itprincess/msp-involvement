@@ -106,22 +106,6 @@ body {
     align:top;
 	}
 
-<<<<<<< HEAD
-#bubble {
-    position: absolute;
-    margin-left: 950px;
-    margin-top: 40px;
-    
-}
-
-#searchbar {
-    position: relative;
-    z-index: 100;
-    margin-left: 950px;
-    margin-top: 40px;
-}
-
-=======
 .search-wrapper {
 	position: fixed;
 	right: -70px;
@@ -140,4 +124,3 @@ body {
 #searchbar {
 	width: 100px;
 	}
->>>>>>> 73156c2c4a0009ac9d7c8715658e6fff3bd17235
