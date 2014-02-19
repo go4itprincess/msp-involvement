@@ -39,8 +39,8 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-info.update = function (results) {
-    if (results.length) {this._div.innerHTML = results;}
+info.update = function (results, constituency) {
+    if (results) {this._div.innerHTML =  constituency + results;}
 };
 
 info.addTo(map);
@@ -86,7 +86,7 @@ function highlightFeature(e) {
     }
     constituency = layer.feature.properties.name
     $.ajax({url:"/constituency/" + constituency, success: function(result) {
-        info.update(results);
+        info.update(result, constituency);
         }
     });
 
