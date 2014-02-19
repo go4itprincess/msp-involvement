@@ -17,6 +17,7 @@ for person in content:
 
     q += ' , '.join(values)
 
-    db.query(q)
+    if len(values)> 0:
+        db.query(q)
     print(person['name'] + " OK!")
 print(str(len(words)) + ' words added. Done')

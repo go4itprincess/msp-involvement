@@ -38,10 +38,13 @@ def const_info(constituency):
             m.total_mentions_of_constituency,
             m.interventions_with_mention,
             m.mentions_percentage_of_total_text,
-            m.percentage_of_interventions_with_mention
+            m.percentage_of_interventions_with_mention,
+            m.id,
+            GROUP_CONCAT(DISTINCT CONCAT("['", w.word, "',", w.weight, "]") SEPARATOR ', ')
         FROM constituencies c
         LEFT JOIN MSPs m ON c.name=m.constituency
         LEFT JOIN datazones d ON c.id = d.constituency
+        LEFT JOIN MSP_words w ON w.MSP_id = m.id
         WHERE c.name="{constituency}"
         GROUP BY c.id
     """.format(constituency=constituency))
@@ -50,6 +53,7 @@ def const_info(constituency):
     result = []
     while row:
         msp = {
+            'MSP_id': row[0][11],
             'name': row[0][0],
             'surname': row[0][1],
             'party': row[0][2],
@@ -60,7 +64,9 @@ def const_info(constituency):
             'total_mentions_of_constituency': row[0][7],
             'interventions_with_mention' : row[0][8],
             'mentions_percentage_of_total_text': row[0][9],
-            'percentage_of_interventions_with_mention': row[0][10]
+            'percentage_of_interventions_with_mention': row[0][10],
+            'words': "[{0}]".format(row[0][12]),
+            'shit':1
         }
         result += [msp]
         row = r.fetch_row()
