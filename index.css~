@@ -1,6 +1,0 @@
-#map {
-	height: 500px;
-	margin-left: 200px;
-	background-color:#2E7EF5;
-}
-
