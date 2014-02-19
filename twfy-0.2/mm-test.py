@@ -5,7 +5,7 @@ import codecs
 from os.path import isfile
 from os import getcwd
 import HTMLParser
-
+import random
 
 
 # ------------------------------------------------------------------------------
@@ -39,6 +39,33 @@ def cleanxml(xmlstr):
     h = HTMLParser.HTMLParser()
     return h.unescape(xmlstr)
 
+def writeTuplesToCSV(columns,tuples,filename):
+	"""
+	"""
+	try:
+		f=codecs.open(filename,"wb","utf-8", errors="replace")
+	except:
+		f=codecs.open(filename+str(random.randint(10,100)),"wb","utf-8", errors="replace")
+
+	line=u"".join([c+u"\t" for c in columns])
+	line=line.strip(u"\t")
+	line+=u"\n"
+	f.write(line)
+
+	pattern=u"".join([u"%s\t" for c in columns])
+	pattern=pattern.strip()
+	pattern+=u"\n"
+
+	for l in tuples:
+		try:
+			line=pattern % l
+			f.write(line)
+		except:
+			print "error writing: ", l
+
+	f.close()
+
+
 
 twfy = TWFY.TWFY('B7Ben2G9Zu2kCnRUEwFzJLea')
 #Get list of all MPs
@@ -64,7 +91,7 @@ def twfyRetrieveAllDebateInterventionsByPerson(person_id):
     page=1
     total_pages=999999999
 
-    while retrieved_rows < all_rows and page <= total_pages+1:
+    while retrieved_rows < all_rows and page <= total_pages:
         try:
             debates=json.loads(twfy.api.getDebates(output='js',type="scotland",person=person_id, num=100, page=str(page)), 'iso-8859-1')
         except:
@@ -72,12 +99,12 @@ def twfyRetrieveAllDebateInterventionsByPerson(person_id):
 
         if retrieved_rows==0:
             print "Total results: ", debates["info"]["total_results"]
-            total_pages=debates["info"]["total_results"] / debates["info"]["results_per_page"]
+            total_pages=(debates["info"]["total_results"] / debates["info"]["results_per_page"])+1
 
         retrieved_rows+=debates["info"]["results_per_page"]
         page+=1
         all_rows.extend(debates["rows"])
-        print "Added ",debates["info"]["results_per_page"], "rows. Page: ", page, "/", total_pages
+        print "Added ",debates["info"]["results_per_page"], "rows. Page: ", page-1, "/", total_pages
         if len(debates["rows"])==0:
             break
 
@@ -193,7 +220,7 @@ def countMentionsOfConstituency(msp,debate):
         total_mentions+=mentions
     return total_mentions,interventions_mentions
 
-def printHowMuchTheyAllSpoke(msps):
+def computeMSPStats(msps):
     for msp in msps:
         try:
             debate=loadDebateInterventionsFromFile(filenameForPerson(msp["person_id"]))
@@ -201,18 +228,19 @@ def printHowMuchTheyAllSpoke(msps):
             print "No data downloaded for MSP", msp["name"], " person_id:", msp["person_id"]
             continue
 
-        info={}
-        info["total_interventions"]=len(debate["rows"])
-        info["avg_intervention_len"]=sum([interventionLength2(r["body"]) for r in debate["rows"]]) / float(info["total_interventions"])
+        stats={}
+        stats["total_interventions"]=len(debate["rows"])
+        stats["avg_intervention_len"]=sum([interventionLength2(r["body"]) for r in debate["rows"]]) / float(stats["total_interventions"])
         text=getTextOfInterventions(debate).lower()
-        info["total_mentions_of_constituency"], info["interventions_with_mention"]=countMentionsOfConstituency(msp,debate)
-        info["mentions_percentage_of_total_text"]=countMentionsOf(text,msp["constituency"].lower()) / float(interventionLength2(text))
-        info["percentage_of_interventions_with_mention"]=info["interventions_with_mention"] / float(info["total_interventions"])
+        stats["total_mentions_of_constituency"], stats["interventions_with_mention"]=countMentionsOfConstituency(msp,debate)
+        stats["mentions_percentage_of_total_text"]=countMentionsOf(text,msp["constituency"].lower()) / float(interventionLength2(text))
+        stats["percentage_of_interventions_with_mention"]=stats["interventions_with_mention"] / float(stats["total_interventions"])
+        msp["stats"]=stats
 
 ##        info["interventions_with_mentions_of_constituency"]=
 
-        print msp["name"], "(", msp["constituency"], "), person_id", msp["person_id"]
-        print info
+##        print msp["name"], "(", msp["constituency"], "), person_id", msp["person_id"]
+##        print stats
 
 def countMentionsOf(where, what):
     reg=what.replace(" ", r"\s+?")
@@ -244,13 +272,29 @@ def convertInterventionsToText():
 ##            fulltext=fulltext.lower()
             writeFileText(fulltext, fn.replace(".json",".txt"))
 
+def saveStatsAsCSV(msps,filename):
+    tuples=[]
+    for msp in msps:
+        if msp.has_key("stats"):
+            stats=msp["stats"]
+            tuples.append((msp["person_id"],msp["name"],msp["constituency"], msp["party"],
+            stats["total_interventions"], stats["avg_intervention_len"], stats["total_mentions_of_constituency"],
+            stats["interventions_with_mention"], stats["mentions_percentage_of_total_text"],
+            stats["percentage_of_interventions_with_mention"]))
+
+    writeTuplesToCSV("person_id name constituency party total_interventions avg_intervention_len total_mentions_of_constituency interventions_with_mention mentions_percentage_of_total_text percentage_of_interventions_with_mention".split(),tuples,filename)
+
 def main():
 
     convertInterventionsToText()
 ##    downloadAllDataForAllMSPs()
 ##    printAllInfoAboutMSP("14071")
+##    print getListOfAllCurrentMSPs()
 
-##    printHowMuchTheyAllSpoke(getListOfAllCurrentMSPs())
+    msps=getListOfAllCurrentMSPs()
+##    writeFileText(json.dumps(msps),"all_msps.json")
+##    computeMSPStats(msps)
+##    saveStatsAsCSV(msps,"msps_stats.csv")
 ##    compareDownloadedResults()
     pass
 
