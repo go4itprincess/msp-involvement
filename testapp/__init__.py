@@ -7,7 +7,6 @@ app = Flask(__name__)
 def hello():
     return app.send_static_file('index.html')
 
-
 @app.route("/<filename>.css")
 def get_css(filename):
     return app.send_static_file(filename + '.css')
@@ -16,11 +15,6 @@ def get_css(filename):
 @app.route("/<filename>.js")
 def get_js(filename):
     return app.send_static_file(filename + '.js')
-
-
-@app.route("/<filename>.json")
-def get_js(filename):
-    return app.send_static_file(filename + '.json')
 
 
 @app.route("/constituency/<string:constituency>")
