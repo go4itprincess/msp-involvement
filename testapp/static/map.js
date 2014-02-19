@@ -7,7 +7,7 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a 
 var constituencies = [];
 var polygons = [];
 
-$.getJSON("../../data/constituencies_polygons.js", function (data) {
+$.getJSON("constituencies_polygons.js", function (data) {
 	constituencies = data;
 	console.log(constituencies[0].polygon);
 	for(var i = 0; i<Object.keys(constituencies).length; i++){
