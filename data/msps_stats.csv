@@ -1,0 +1,129 @@
+person_id	name	constituency	party	total_interventions	avg_intervention_len	total_mentions_of_constituency	interventions_with_mention	mentions_percentage_of_total_text	percentage_of_interventions_with_mention
+14071	Alex Neil	Airdrie and Shotts	Scottish National Party	3373	136.295879039	7	5	1.51228733459E-005	0.00148
+14099	Elaine Smith	Coatbridge and Chryston	Labour	1298	161.255007704	36	33	0.00016993	0.02542
+14009	Jamie Hepburn	Cumbernauld and Kilsyth	Scottish National Party	872	210.228211009	50	35	0.0002697308	0.04014
+13982	Linda Fabiani	East Kilbride	Scottish National Party	1609	202.379738968	180	96	0.0005486366	0.05966
+25094	Angus MacDonald	Falkirk East	Scottish National Party	121	214.338842975	9	4	0.0003427135	0.03306
+14043	Michael Matheson	Falkirk West	Scottish National Party	1268	261.496845426	6	3	1.79446228937E-005	0.00237
+14056	Christina McKelvie	Hamilton, Larkhall and Stonehouse	Scottish National Party	469	268.884861407	6	5	4.71153619638E-005	0.01066
+25110	John Pentland	Motherwell and Wishaw	Labour	163	196.098159509	14	10	0.000432379	0.06135
+14059	Michael McMahon	Uddingston and Bellshill	Labour	706	217.247875354	1	1	6.46910034222E-006	0.00142
+14024	Bill Kidd	Glasgow Anniesland	Scottish National Party	210	205.828571429	14	14	0.0003216394	0.06667
+25082	James Dornan	Glasgow Cathcart	Scottish National Party	198	310.343434343	11	10	0.0001769541	0.05051
+14117	Sandra White	Glasgow Kelvin	Scottish National Party	1316	218.553191489	24	20	8.2732374557E-005	0.01520
+13984	Patricia Ferguson	Glasgow Maryhill and Springburn	Labour	2916	110.050754458	2	2	6.18905712809E-006	0.00069
+14025	Johann Lamont	Glasgow Pollok	Labour	2437	203.599917932	12	12	2.40111411695E-005	0.00492
+14039	Paul Martin	Glasgow Provan	Labour	765	173.287581699	7	6	0.000052458	0.00784
+25101	John Mason	Glasgow Shettleston	Scottish National Party	468	213.997863248	10	9	9.85474111595E-005	0.01923
+14105	Nicola Sturgeon	Glasgow Southside	Scottish National Party	4413	191.526172672	1	1	1.17532706414E-006	0.00023
+14022	James Kelly	Rutherglen	Labour	778	187.164524422	90	57	0.0006125574	0.07326
+14089	Michael Russell	Argyll and Bute	Scottish National Party	3202	168.606808245	28	20	5.148184989E-005	0.00625
+13993	Rob Gibson	Caithness, Sutherland and Ross	Scottish National Party	1321	228.965934898	3	3	9.83538838309E-006	0.00227
+13980	Fergus Ewing	Inverness and Nairn	Scottish National Party	3079	197.510555375	1	1	0.000001632	0.00032
+14029	Richard Lochhead	Moray	Scottish National Party	2765	191.437251356	102	56	0.0001914195	0.02025
+13947	Dr Alasdair Allan	Na h-Eileanan an Iar	Scottish National Party	701	180.436519258	5	5	3.91953968926E-005	0.00713
+14046	Liam McArthur	Orkney Islands	Liberal Democrat	909	286.488448845	59	55	0.0002243542	0.06051
+14092	Tavish Scott	Shetland Islands	Liberal Democrat	2314	179.957649092	27	24	6.43798314679E-005	0.01037
+14107	Dave Thompson	Skye, Lochaber and Badenoch	Scottish National Party	454	223.691629956	11	11	0.0001073213	0.02423
+13969	Angela Constance	Almond Valley	Scottish National Party	539	220.237476809	0	0	0	0.00000
+25075	Marco Biagi	Edinburgh Central	Scottish National Party	207	246.84057971	19	12	0.0003674409	0.05797
+14031	Kenny MacAskill	Edinburgh Eastern	Scottish National Party	3036	231.356060606	0	0	0	0.00000
+10102	Malcolm Chisholm	Edinburgh Northern and Leith	Labour	2638	234.716830933	1	1	1.603635763E-006	0.00038
+25095	Gordon MacDonald	Edinburgh Pentlands	Scottish National Party	101	246.96039604	2	2	7.87835815016E-005	0.01980
+25084	Jim Eadie	Edinburgh Southern	Scottish National Party	240	222.141666667	4	4	7.39535571661E-005	0.01667
+25092	Colin Keir	Edinburgh Western	Scottish National Party	132	220.371212121	11	8	0.0003734637	0.06061
+14012	Fiona Hyslop	Linlithgow	Scottish National Party	3136	195.433354592	85	43	0.0001376975	0.01371
+25074	Colin Beattie	Midlothian North and Musselburgh	Scottish National Party	110	196.581818182	10	10	0.0004568296	0.09091
+13961	Keith Brown	Clackmannanshire and Dunblane	Scottish National Party	1522	192.41261498	0	0	0	0.00000
+25079	Roderick Campbell	North East Fife	Scottish National Party	240	299.3625	27	16	0.000370874	0.06667
+25115	David Torrance	Kirkcaldy	Scottish National Party	68	349.161764706	42	15	0.0017468702	0.22059
+14041	Tricia Marwick	Mid Fife and Glenrothes	Scottish National Party	2504	108.776357827	0	0	0	0.00000
+10581	John Swinney	Perthshire North	Scottish National Party	5642	168.17954626	2	2	2.09370809312E-006	0.00035
+10148	Roseanna Cunningham	Perthshire South and Kinross-shire	Scottish National Party	1443	297.205821206	0	0	0	0.00000
+13971	Bruce Crawford	Stirling	Scottish National Party	1528	152.890052356	113	53	0.0004782968	0.03469
+25114	Kevin Stewart	Aberdeen Central	Scottish National Party	535	114.257943925	2	2	3.23065243026E-005	0.00374
+14115	Maureen Watt	Aberdeen South and North Kincardine	Scottish National Party	755	193.413245033	3	3	2.03834812268E-005	0.00397
+10525	Alex Salmond	Aberdeenshire East	Scottish National Party	6041	135.438503559	0	0	0	0.00000
+25112	Dennis Robertson	Aberdeenshire West	Scottish National Party	301	186.727574751	47	34	0.0008271881	0.11296
+13976	Nigel Don	Angus North and Mearns	Scottish National Party	536	249.597014925	7	7	5.19118388657E-005	0.01306
+25081	Graeme Dey	Angus South	Scottish National Party	186	323.456989247	11	8	0.0001806062	0.04301
+14102	Stewart Stevenson	Banffshire and Buchan Coast	Scottish National Party	3299	170.69657472	0	0	0	0.00000
+14085	Shona Robison	Dundee City East	Scottish National Party	2079	211.28042328	1	1	2.26106224704E-006	0.00048
+13987	Joe FitzPatrick	Dundee City West	Scottish National Party	484	153.690082645	0	0	0	0.00000
+14091	John Scott	Ayr	Conservative	1661	133.768211921	723	236	0.003223764	0.14208
+14013	Adam Ingram	Carrick, Cumnock and Doon Valley	Scottish National Party	957	217.484848485	4	4	1.90997340362E-005	0.00418
+13966	Aileen Campbell	Clydesdale	Scottish National Party	485	281.719587629	22	16	0.0001595371	0.03299
+14070	Elaine Murray	Dumfriesshire	Labour	1441	277.14573213	28	24	6.94989128384E-005	0.01666
+14002	Iain Gray	East Lothian	Labour	2004	158.801397206	81	42	0.0002527759	0.02096
+14026	John Lamont	Ettrick, Roxburgh and Berwickshire	Conservative	409	279.621026895	0	0	0	0.00000
+13985	Alex Fergusson	Galloway and West Dumfries	Conservative	8646	58.111265325	6	6	1.17283021523E-005	0.00069
+13968	Willie Coffey	Kilmarnock and Irvine Valley	Scottish National Party	265	285.056603774	8	7	0.0001048465	0.02642
+14000	Christine Grahame	Midlothian South, Tweeddale and Lauderdale	Scottish National Party	2527	201.256034824	3	3	5.84582228311E-006	0.00119
+14075	Gil Paterson	Clydebank and Milngavie	Scottish National Party	504	197.327380952	1	1	9.96810207337E-006	0.00198
+13994	Kenneth Gibson	Cunninghame North	Scottish National Party	1588	200.0302267	17	17	5.29571918982E-005	0.01071
+25078	Margaret Burgess	Cunninghame South	Scottish National Party	291	209.570446735	12	5	0.0001945431	0.01718
+13949	Jackie Baillie	Dumbarton	Labour	2027	191.490379872	96	62	0.0002453016	0.03059
+25098	Ken Macintosh	Eastwood	Labour	547	220.890310786	0	0	0	0.00000
+14061	Duncan McNeil	Greenock and Inverclyde	Labour	1042	161.915547025	45	41	0.0002646343	0.03935
+25072	George Adam	Paisley	Scottish National Party	276	274.380434783	256	93	0.0033382015	0.33696
+25096	Derek MacKay	Renfrewshire North and West	Scottish National Party	536	165.873134328	4	3	0.000044484	0.00560
+14008	Hugh Henry	Renfrewshire South	Labour	1911	194.761904762	0	0	0	0.00000
+14057	Fiona McLeod	Strathkelvin and Bearsden	Scottish National Party	511	190.156555773	29	19	0.0002956017	0.03718
+25093	Richard Lyle	Central Scotland	Scottish National Party	159	286.955974843	5	5	0.0001081081	0.03145
+14120	John Wilson	Central Scotland	Scottish National Party	334	222.718562874	19	14	0.0002528075	0.04192
+25073	Clare Adamson	Central Scotland	Scottish National Party	225	262.711111111	12	8	0.0002001101	0.03556
+25107	Siobhan McMahon	Central Scotland	Labour	127	339.11023622	12	10	0.0002746938	0.07874
+25089	Mark Griffin	Central Scotland	Labour	152	260.203947368	11	9	0.0002751445	0.05921
+25103	Margaret McCulloch	Central Scotland	Labour	148	322.790540541	14	12	0.0002895433	0.08108
+14065	Margaret Mitchell	Central Scotland	Conservative	742	211.270889488	27	25	0.0001707272	0.03369
+25099	Hanzala Malik	Glasgow	Labour	214	190.004672897	186	77	0.0045225764	0.35981
+25113	Drew Smith	Glasgow	Labour	335	201.382089552	239	81	0.003503731	0.24179
+25108	Anne McTaggart	Glasgow	Labour	198	267.868686869	199	79	0.0037055658	0.39899
+25119	Humza Yousaf	Glasgow	Scottish National Party	192	253.21875	98	47	0.0019897265	0.24479
+13977	Bob Doris	Glasgow	Scottish National Party	719	213.663421419	636	218	0.0041039672	0.30320
+14006	Patrick Harvie	Glasgow	Green	1874	196.578441836	281	146	0.0007572716	0.07791
+25080	Ruth Davidson	Glasgow	Conservative	458	146.829694323	103	34	0.001511971	0.07424
+25097	Mike MacKenzie	Highlands and Islands	Scottish National Party	357	129.386554622	44	34	0.0009428504	0.09524
+14001	Rhoda Grant	Highlands and Islands	Labour	779	251.912708601	161	110	0.0008134107	0.14121
+14103	David Stewart	Highlands and Islands	Labour	344	225.218023256	103	54	0.0013158399	0.15698
+14051	Jamie McGrigor	Highlands and Islands	Conservative	1670	212.139520958	354	245	0.000991555	0.14671
+14090	Mary Scanlon	Highlands and Islands	Conservative	2228	204.558348294	150	123	0.0003258532	0.05521
+13956	Sarah Boyack	Lothian	Labour	2210	228.62081448	161	99	0.0003165185	0.04480
+25083	Kezia Dugdale	Lothian	Labour	357	190.392156863	15	9	0.0002181152	0.02521
+25087	Neil Findlay	Lothian	Labour	754	116.834217507	97	58	0.001088469	0.07692
+13960	Gavin Brown	Lothian	Conservative	1284	181.250778816	34	21	0.0001445492	0.01636
+25091	Alison Johnstone	Lothian	Green	165	361.248484848	27	19	0.0004472272	0.11515
+14032	Margo MacDonald	Lothian	Independent	2484	97.6227858293	100	70	0.0004107518	0.02818
+13951	Claire Baker	Mid Scotland and Fife	Labour	453	318.130242826	8	6	5.49733722728E-005	0.01325
+14095	Richard Simpson	Mid Scotland and Fife	Labour	1710	208.356140351	5	5	1.39294002279E-005	0.00292
+13991	Murdo Fraser	Mid Scotland and Fife	Conservative	2187	199.782807499	38	36	8.63106729961E-005	0.01646
+14096	Elizabeth Smith	Mid Scotland and Fife	Conservative	683	275.449487555	6	5	3.16150550892E-005	0.00732
+25085	Annabelle Ewing	Mid Scotland and Fife	Scottish National Party	302	190.139072848	17	16	0.0002928006	0.05298
+25111	Willie Rennie	Mid Scotland and Fife	Liberal Democrat	787	120.181702668	2	2	2.0906724648E-005	0.00254
+13952	Richard Baker	North East Scotland	Labour	1003	236.258225324	28	24	0.0001173021	0.02393
+25100	Jenny Marra	North East Scotland	Labour	512	172.982421875	2	2	2.23211794511E-005	0.00391
+14034	Lewis Macdonald	North East Scotland	Labour	2520	177.798412698	1	1	2.21868711409E-006	0.00040
+14020	Alex Johnstone	North East Scotland	Conservative	1855	191.791913747	6	5	1.67428933394E-005	0.00270
+14064	Nanette Milne	North East Scotland	Conservative	791	351.324905183	23	21	8.20745593845E-005	0.02655
+14053	Alison McInnes	North East Scotland	Liberal Democrat	516	298.261627907	13	9	8.35373572636E-005	0.01744
+25102	Joan McAlpine	South Scotland	Scottish National Party	258	261.480620155	22	19	0.0003221083	0.07364
+25106	Aileen McLeod	South Scotland	Scottish National Party	176	339.704545455	19	17	0.0003141586	0.09659
+25118	Paul Wheelhouse	South Scotland	Scottish National Party	579	253.97582038	12	11	8.06159055182E-005	0.01900
+25077	Chic Brodie	South Scotland	Scottish National Party	340	205.988235294	6	5	0.000084488	0.01471
+25090	Claudia Hamilton Beamish	South Scotland	Labour	304	246.223684211	38	30	0.0004995596	0.09868
+25109	Graeme Pearson	South Scotland	Labour	285	234.515789474	15	13	0.0002216869	0.04561
+14011	Jim Hume	South Scotland	Liberal Democrat	579	243.18134715	12	11	8.43188094184E-005	0.01900
+25086	Mary Fee	West Scotland	Labour	191	267.706806283	18	14	0.0003469278	0.07330
+25076	Neil Bibby	West Scotland	Labour	241	266.713692946	21	9	0.0003226897	0.03734
+25105	Margaret McDougall	West Scotland	Labour	199	247.16080402	3	3	6.01443464314E-005	0.01508
+14044	Stewart Maxwell	West Scotland	Scottish National Party	1054	240.460151803	5	4	1.95775171793E-005	0.00380
+14060	Stuart McMillan	West Scotland	Scottish National Party	557	246.244165171	16	15	0.0001154543	0.02693
+13998	Annabel Goldie	West Scotland	Conservative	1885	175.671087533	4	4	1.19904076739E-005	0.00212
+13967	Jackson Carlaw	West Scotland	Conservative	483	360.064182195	1	1	5.70141680208E-006	0.00207
+25171	Jayne Baxter	Mid Scotland and Fife	Labour	64	428.890625	11	10	0.0003957262	0.15625
+25104	Mark McDonald	Aberdeen Donside	Scottish National Party	724	184.142265193	1	1	7.41015190811E-006	0.00138
+25182	Christian Allard	North East Scotland	Scottish National Party	53	290.113207547	9	9	0.0005782947	0.16981
+25193	Cameron Buchanan	Lothian	Conservative	20	530.4	9	4	0.0008391608	0.20000
+25207	Cara Hilton	Dunfermline	Labour	7	792.142857143	18	4	0.0032097004	0.57143
+25088	John Finnie	Highlands and Islands	Independent	232	221.793103448	18	15	0.0003437279	0.06466
+25116	Jean Urquhart	Highlands and Islands	Independent	180	239.6	59	32	0.0013519087	0.17778
