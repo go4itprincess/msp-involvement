@@ -1,6 +1,7 @@
 from twfy import TWFY
 import json
 import urllib2
+import re
 
 twfy = TWFY.TWFY('B7Ben2G9Zu2kCnRUEwFzJLea')
 
@@ -12,41 +13,38 @@ constituencies = json.loads(constituencies_string, 'iso-8859-1')
 
 output = []
 
+
 for constituency in constituencies.values():
-    id =  constituency['id']
+    id = constituency['id']
     name = constituency['name']
 
     url = "http://mapit.mysociety.org/area/" + str(id) + ".kml"
     req = urllib2.Request(url)
-    polygon = urllib2.urlopen(req).read()
 
-    polygon = polygon[polygon.index("<coordinates>")+13:]
-    polygon = polygon[:polygon.index("<")].split(' ')
+    polygons_scraped = re.findall("<coordinates>(.*)</coordinates>",urllib2.urlopen(req).read())
 
     polygons = []
-    i = 0
 
-    for point in polygon:
-        point = point.split(',')[:2]
-	points = []
+    for poly in polygons_scraped:
+        coordinates = poly.split(' ')
 
-        for p in point:
-            p = p.split('.')
-            p[1] = p[1][:4]
-            points.append(float('.'.join(p)))
+        polygon = []
+        i = 0
 
-	t = points[0]
-	points[0] = points[1]
-	points[1] = t
+        for coordinate in coordinates:
+            coordinate = map(float,coordinate.split(',')[:2])
+            coordinate[0], coordinate[1] = coordinate[1], coordinate[0]
 
-	if i% 10 == 0:
-             polygons.append(points)
-	i+=1
+            if i%10 == 0:
+                polygon.append(coordinate)
+            i += 1
+
+        polygons.append([polygon])
 
     output.append({"name":name,"id":id,"polygon":polygons})
     print name
 
-fo = open("../data/polygons_clean_floats.js", "w+")
+fo = open("../testapp/static/polygons_clean_floats.js", "w+")
 fo.write(json.dumps(output))
 fo.close()
 

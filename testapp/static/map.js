@@ -11,7 +11,7 @@ $.getJSON("constituencies_polygons.js", function (data) {
 	constituencies = data;
 	console.log(constituencies[0].polygon);
 	for(var i = 0; i<Object.keys(constituencies).length; i++){
-		polygons[i] = L.polygon(constituencies[i].polygon).addTo(map);
+		polygons[i] = L.multiPolygon(constituencies[i].polygon).addTo(map);
 		polygons[i].bindPopup("<b>" + constituencies[i].name + "</b>")
 	}
 });
