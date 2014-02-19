@@ -1,0 +1,50 @@
+
+.listitem:hover {
+        color:black;
+}
+.listitem {
+        cursor:pointer;
+        font-weight:900;
+	color:gray
+}
+#asdf {
+        font-weight:900;
+}
+
+
+body {
+	margin: 20px;
+	padding: 0;
+	height:auto;
+	background: -webkit-linear-gradient(#EEEEFF, #FFFFFF); /* For Safari */
+	background: -o-linear-gradient(#EEEEFF, #FFFFFF); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#EEEEFF, #FFFFFF); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#EEEEFF, #FFFFFF); /* Standard syntax */
+	background-repeat: no-repeat;
+	background-color: #FFFFFF;
+}
+	
+#title {
+	position: relative;
+	text-align: center;
+}
+
+#list {
+	position: relative;
+	margin-right: 1000px;
+	border:2px solid;
+	border-radius:25px;
+	box-shadow: 10px 10px 5px gray;
+	padding: 12px;
+	text-align: right;
+	background-color: #D0F5A9;
+}
+
+#map {
+	float: right;
+	position: relative;
+	text-align: left;
+	width: 980px;
+	height: 500px;
+	background-color: grey;
+}

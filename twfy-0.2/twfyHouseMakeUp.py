@@ -24,6 +24,7 @@ for constituency in constituencies.values():
     polygon = polygon[:polygon.index("<")].split(' ')
 
     polygons = []
+    i = 0
 
     for point in polygon:
         point = point.split(',')[:2]
@@ -32,15 +33,20 @@ for constituency in constituencies.values():
         for p in point:
             p = p.split('.')
             p[1] = p[1][:4]
-            points.append('.'.join(p))
+            points.append(float('.'.join(p)))
 
-        polygons.append(','.join(points))
+	t = points[0]
+	points[0] = points[1]
+	points[1] = t
 
+	if i% 10 == 0:
+             polygons.append(points)
+	i+=1
 
     output.append({"name":name,"id":id,"polygon":polygons})
     print name
 
-fo = open("../data/polygons_clean.js", "w+")
+fo = open("../data/polygons_clean_floats.js", "w+")
 fo.write(json.dumps(output))
 fo.close()
 
