@@ -12,13 +12,14 @@ $.getJSON("constituencies_geometry.js", function (data) {
     constituencies = data;
 
     for(var i = 0; i<Object.keys(constituencies).length; i++){
-    	console.log([constituencies[i].geometry.centre_lat, constituencies[i].geometry.centre_lon], constituencies[i].geometry.area/100000);
-        circle[i] = L.circle([constituencies[i].geometry.centre_lat, constituencies[i].geometry.centre_lon], constituencies[i].geometry.area/100000, {
+        console.log([constituencies[i].geometry.centre_lat, constituencies[i].geometry.centre_lon], constituencies[i].population);
+        circle[i] = L.circle([constituencies[i].geometry.centre_lat, constituencies[i].geometry.centre_lon], constituencies[i].population/10, {
             color: 'red',
             fillColor: '#f03',
             fillOpacity: 0.5
             }).addTo(map);
-	}
+
+    }
 });
 
 

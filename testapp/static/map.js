@@ -1,4 +1,9 @@
-var map = L.map('map').setView([56.834, -3.994], 7);
+var map = L.map('map', {
+        center: L.latLng(56.834, -3.994),
+        zoom: 7,
+        minZoom: 5
+        });
+map.setMaxBounds(L.latLngBounds(L.latLng(50.0,-20.0),L.latLng(65.0,15.0)));
 
 // add an OpenStreetMap tile layer
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
