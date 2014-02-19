@@ -1,3 +1,17 @@
+
+.listitem:hover {
+        color:black;
+}
+.listitem {
+        cursor:pointer;
+        font-weight:900;
+	color:gray
+}
+#asdf {
+        font-weight:900;
+}
+
+
 body {
 	margin: 20px;
 	padding: 0;
@@ -23,7 +37,7 @@ body {
 	box-shadow: 10px 10px 5px gray;
 	padding: 12px;
 	text-align: right;
-	background-color: white;
+	background-color: #D0F5A9;
 }
 
 #map {
