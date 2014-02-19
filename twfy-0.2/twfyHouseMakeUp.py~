@@ -32,7 +32,7 @@ for constituency in constituencies.values():
         for p in point:
             p = p.split('.')
             p[1] = p[1][:4]
-            points.append('.'.join(p))
+            points.append(float('.'.join(p)))
 
         polygons.append(points)
 
