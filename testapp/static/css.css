@@ -146,16 +146,16 @@ body {
 }
 
 #bubble {
-    position: relative;
-    top: 0;
-    left: 0;
+    position: absolute;
+    margin-left: 950px;
+    margin-top: 40px;
     
 }
 
 #searchbar {
-    position: absolute;
+    position: relative;
     z-index: 100;
-    top: 0;
-    left: 0
+    margin-left: 950px;
+    margin-top: 40px;
 }
 
