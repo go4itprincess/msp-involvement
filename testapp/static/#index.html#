@@ -25,7 +25,7 @@
 			  <a href="#" class="demo-pricing demo-pricing-3" id="Health">Health</a>
 			  <a href="#" class="demo-pricing demo-pricing-1" id="Employment">Employment</a>
 			  <a href="#" class="demo-pricing demo-pricing-2" id="Income">Income</a>
-			  <a href="#" class="demo-pricing demo-pricing-2" id="magnifier">Search</a>
+
 		        </div>
 		</div>
 		<script src="map.js"></script>
