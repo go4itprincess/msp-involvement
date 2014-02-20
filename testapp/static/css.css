@@ -126,15 +126,23 @@ body {
 	}
 
 h4 {
-    font-family: 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 16px;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.infotext{
+	padding-bottom: 4px;
+	display: block;
 }
 
 .info {
-padding: 6px 8px;
-font: 14px/16px Arial, Helvetica, sans-serif;
-background: white;
-background: rgba(255,255,255,0.8);
-box-shadow: 0 0 15px rgba(0,0,0,0.2);
-border-radius: 5px;
+	padding: 4px 14px;
+	font-family: "Open Sans", Arial, Helvetica, sans-serif;
+	font-size: 16px ;
+	font-weight: 300;
+	background: white;
+	background: rgba(255,255,255,0.8);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 5px;
 }

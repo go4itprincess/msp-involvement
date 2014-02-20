@@ -68,7 +68,7 @@ var geojson = L.geoJson(constituencies, {
 }).addTo(map);
 
  var fill = d3.scale.category20();
- var tagXsize=400;
+ var tagXsize=300;
  var tagYsize=200;
 
 
@@ -127,22 +127,25 @@ var InfoControl = L.Control.extend({
         this._div.innerHTML =
 
         "<h4>"+constituency+"</h4>" +
-        "<br/>" +
-        "<span> MSP "+sel_constituency.result[0].name+" "+sel_constituency.result[0].surname+"</span>"+
-        "<br/>" +
+        "<span class='infotext'> MSP "+sel_constituency.result[0].name+" "+sel_constituency.result[0].surname+"</span>"+
         "<img src=\"" + sel_constituency.result[0].url.replace(' ','%20') + "\"/>"+
-        "<svg style='position:absolute;left:100;'> </svg>" 
+        "<svg > </svg>" 
         ;
+
+
 
       d3.layout.cloud().size([tagXsize, tagYsize])
           .words(
             words.map(function(d){return {text: d[0], size: (d[1]*50)+5};}))
           .padding(5)
-          .rotate(function() { return ~~(Math.random() * 2) * 90;})
+          .rotate(function() { return 0/*~~(Math.random() * 2) * 90*/;})
           .font("Impact")
           .fontSize(function(d) { return d.size; })
           .on("end", draw)
           .start();
+
+          el.style.height= (parseInt(tempHeight) + 1) +"px";
+el.style.width= (parseInt(tempWidth) + 1) + "px";
 
         } else {
          this._div.innerHTML = "<p>Hover over a constituency.</p>";
