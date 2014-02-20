@@ -119,10 +119,8 @@ var InfoControl = L.Control.extend({
         if (results) {
         sel_constituency = results;
 
-        // console.log(results);
 
-         // console.log(sel_constituency.result[0].words);
-         words=JSON.parse(sel_constituency.result[0].words);
+        words=JSON.parse(sel_constituency.result[0].words);
 
         this._div.innerHTML =
 
