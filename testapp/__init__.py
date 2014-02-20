@@ -3,6 +3,8 @@ import _mysql
 
 app = Flask(__name__)
 
+db = _mysql.connect(host="d33028.mysql.zone.ee", user="d33028sa73662", passwd="Hackath0n", db="d33028sd72729")
+
 @app.route("/")
 def hello():
     return app.send_static_file('index.html')
@@ -25,7 +27,6 @@ def get_ico(filename):
 
 @app.route("/constituency/<string:constituency>")
 def const_info(constituency):
-    db = _mysql.connect(host="localhost", user="ilwhack14", passwd="hackathon", db="ilwhack14")
     db.query("""
         SELECT
             m.name,
@@ -147,7 +148,6 @@ def get_stats():
     if ("percentage_of_interventions_with_mention" in categories) or (len(categories)==0):
         fields['percentage_of_interventions_with_mention']="AVG(m.percentage_of_interventions_with_mention)"
 
-    db = _mysql.connect(host="localhost", user="ilwhack14", passwd="hackathon", db="ilwhack14")
     db.query("""
         SELECT
             {fields}
