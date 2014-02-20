@@ -101,8 +101,29 @@ def get_stats():
     categories = request.form.getlist('categories[]')
     fields = {'c_id':'c.id', 'c_name':'c.name'}
 
-    if ("rank" in categories) or (len(categories)==0):
-        fields['rank']="AVG(simd.2006*1+simd.2009*2+simd.2012*7)/6505*10 AS rank"
+    if ("rank_gen" in categories) or (len(categories)==0):
+        fields['rank_gen']="AVG(s_gen.2006*1+s_gen.2009*2+s_gen.2012*7)/6505*10 AS rank_gen"
+        
+    if ("rank_cri" in categories) or (len(categories)==0):
+        fields['rank_cri']="AVG(s_cri.2006*1+s_cri.2009*2+s_cri.2012*7)/6505*10 AS rank_cri"
+        
+    if ("rank_ed" in categories) or (len(categories)==0):
+        fields['rank_ed']="AVG(s_ed.2006*1+s_ed.2009*2+s_ed.2012*7)/6505*10 AS rank_ed"
+        
+    if ("rank_emp" in categories) or (len(categories)==0):
+        fields['rank_emp']="AVG(s_emp.2006*1+s_emp.2009*2+s_emp.2012*7)/6505*10 AS rank_emp"
+        
+    if ("rank_geo" in categories) or (len(categories)==0):
+        fields['rank_geo']="AVG(s_geo.2006*1+s_geo.2009*2+s_geo.2012*7)/6505*10 AS rank_geo"
+        
+    if ("rank_gen" in categories) or (len(categories)==0):
+        fields['rank_hea']="AVG(s_hea.2006*1+s_hea.2009*2+s_hea.2012*7)/6505*10 AS rank_hea"
+        
+    if ("rank_hou" in categories) or (len(categories)==0):
+        fields['rank_hou']="AVG(s_hou.2006*1+s_hou.2009*2+s_hou.2012*7)/6505*10 AS rank_hou"
+        
+    if ("rank_inc" in categories) or (len(categories)==0):
+        fields['rank_inc']="AVG(s_inc.2006*1+s_inc.2009*2+s_inc.2012*7)/6505*10 AS rank_inc"
 
     if ("total_interventions" in categories) or (len(categories)==0):
         fields['total_interventions']="AVG(m.total_interventions)"
@@ -129,7 +150,14 @@ def get_stats():
         FROM constituencies c
         LEFT JOIN MSPs m ON c.name=m.constituency
         LEFT JOIN datazones d ON c.id = d.constituency
-        LEFT JOIN simd_general simd on simd.datazone = d.code
+        LEFT JOIN simd_general s_gen on s_gen.datazone = d.code
+        LEFT JOIN simd_crime s_cri on s_cri.datazone = d.code
+        LEFT JOIN simd_education s_ed on s_ed.datazone = d.code
+        LEFT JOIN simd_employment s_emp on s_emp.datazone = d.code
+        LEFT JOIN simd_geoacc s_geo on s_geo.datazone = d.code
+        LEFT JOIN simd_health s_hea on s_hea.datazone = d.code
+        LEFT JOIN simd_housing s_hou on s_hou.datazone = d.code
+        LEFT JOIN simd_income s_inc on s_inc.datazone = d.code
         GROUP BY c.id
     """.format(fields=' , '.join(fields.values())))
 
