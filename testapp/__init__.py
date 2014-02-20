@@ -3,31 +3,25 @@ import _mysql
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def hello():
     return app.send_static_file('index.html')
-
 
 @app.route("/<filename>.css")
 def get_css(filename):
     return app.send_static_file(filename + '.css')
 
-
 @app.route("/<filename>.js")
 def get_js(filename):
     return app.send_static_file(filename + '.js')
-
 
 @app.route("/<filename>.json")
 def get_json(filename):
     return app.send_static_file(filename + '.json')
 	
-	
 @app.route("/<filename>.ico")
 def get_ico(filename):
     return app.send_static_file(filename + '.ico')
-
 
 @app.route("/constituency/<string:constituency>")
 def const_info(constituency):
@@ -38,7 +32,7 @@ def const_info(constituency):
             m.surname,
             m.party,
             m.url,
-            AVG(d.rank2004+d.rank2006*4+d.rank2009*15+d.rank2012*30)/50/6505*100 AS rank,
+            AVG(simd.2006*1+simd.2009*2+simd.2012*7)/6505*10 AS rank,
             m.total_interventions,
             m.avg_intervention_len,
             m.total_mentions_of_constituency,
@@ -46,11 +40,12 @@ def const_info(constituency):
             m.mentions_percentage_of_total_text,
             m.percentage_of_interventions_with_mention,
             m.id,
-            GROUP_CONCAT(DISTINCT CONCAT("['", w.word, "',", w.weight, "]") SEPARATOR ', ')
+            GROUP_CONCAT(DISTINCT CONCAT("[\\\"", w.word, "\\\",", w.weight, "]") SEPARATOR ', ')
         FROM constituencies c
         LEFT JOIN MSPs m ON c.name=m.constituency
         LEFT JOIN datazones d ON c.id = d.constituency
         LEFT JOIN MSP_words w ON w.MSP_id = m.id
+        LEFT JOIN simd_general simd on simd.datazone = d.code
         WHERE c.name="{constituency}"
         GROUP BY c.id
     """.format(constituency=constituency))
@@ -71,8 +66,7 @@ def const_info(constituency):
             'interventions_with_mention' : row[0][8],
             'mentions_percentage_of_total_text': row[0][9],
             'percentage_of_interventions_with_mention': row[0][10],
-            'words': "[{0}]".format(row[0][12]),
-            'shit':1
+            'words': "[{0}]".format(row[0][12])
         }
         result += [msp]
         row = r.fetch_row()
@@ -87,7 +81,7 @@ def get_stats():
     fields = {'c_id':'c.id', 'c_name':'c.name'}
 
     if ("rank" in categories) or (len(categories)==0):
-        fields['rank']="AVG(d.rank2004+d.rank2006*4+d.rank2009*15+d.rank2012*30)/50/6505*100 AS rank"
+        fields['rank']="AVG(simd.2006*1+simd.2009*2+simd.2012*7)/6505*10 AS rank"
 
     if ("total_interventions" in categories) or (len(categories)==0):
         fields['total_interventions']="AVG(m.total_interventions)"
@@ -114,6 +108,7 @@ def get_stats():
         FROM constituencies c
         LEFT JOIN MSPs m ON c.name=m.constituency
         LEFT JOIN datazones d ON c.id = d.constituency
+        LEFT JOIN simd_general simd on simd.datazone = d.code
         GROUP BY c.id
     """.format(fields=' , '.join(fields.values())))
 
