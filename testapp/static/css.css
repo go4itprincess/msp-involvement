@@ -125,8 +125,7 @@ body {
 	width: 100px;
 	}
 
-.info {
-    position: relative;
-    bottom: 20px;
-    left: 20px;
+h4 {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 16px;
 }

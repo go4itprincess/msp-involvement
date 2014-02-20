@@ -40,7 +40,8 @@ function buttonClicked(num) {
     }
 }
 
-var request_data =  "{\"result\": [{\"surname\": \" Gibson\", \"percentage_of_interventions_with_mention\": \"0.00227\", \"total_mentions_of_constituency\": \"3\", \"words\": \"[['uk',0.307912], ['miller',0.234796], ['farming',0.224131], ['support',0.204922], ['cap',0.172721], ['vital',0.160378], ['farm',0.154422], ['funding',0.146016], ['production',0.145559], ['ball',0.128258], ['coupling',0.128258], ['eustice',0.128258], ['gaindykehead',0.128258], ['lever',0.128258], ['nigel',0.128258], ['airdrie',0.121905], ['stunning',0.121905], ['debacle',0.117398], ['hectare',0.113902], ['paterson',0.113902], ['competitors',0.111045], ['convergence',0.111045], ['coupled',0.111045], ['owen',0.111045], ['rough',0.111045], ['defra',0.10863], ['edition',0.10863], ['pressures',0.10863], ['dig',0.106538], ['door',0.106538], ['farmer',0.106538], ['grazing',0.106538], ['burns',0.104693], ['implementation',0.104693], ['leadership',0.104693], ['nfu',0.104693], ['controlled',0.101549], ['played',0.0989313], ['double',0.0966892], ['southern',0.0966892], ['targeted',0.0966892], ['actions',0.095678], ['budgets',0.0929855], ['george',0.0921819], ['remove',0.0899922], ['brown',0.0893253], ['foundation',0.0893]\", \"mentions_percentage_of_total_text\": \"0.00000983539\", \"shit\": 1, \"avg_intervention_len\": \"228.966\", \"name\": \"Rob\", \"rank_c\": \"45.106429904783\", \"interventions_with_mention\": \"3\", \"MSP_id\": \"13993\", \"url\": \"http://www.scottish.parliament.uk/images/MSPs and office holders Session 4/RobGibsonMSP20110510.JPG\", \"total_interventions\": \"1321\", \"party\": \"Scottish National Party\"}]}"
+var request_data =  "{\"result\": [    {      \"surname\": \" Scott\",\"percentage_of_interventions_with_mention\": \"0.14208\",      \"total_mentions_of_constituency\": \"723\",\"words\": \"[[\\\"draft\\\",0.465356], [\\\"swinney\\\",0.454288], [\\\"finance\\\",0.421423], [\\\"order\\\",0.351362], [\\\"local\\\",0.302168], [\\\"item\\\",0.260115], [\\\"motion\\\",0.247806], [\\\"business\\\",0.235882]]\",\"mentions_percentage_of_total_text\": \"0.00322376\",\"shit\": 1,      \"avg_intervention_len\": \"133.768\",      \"name\": \"John\",      \"rank_c\": \"53.956609546201\",      \"interventions_with_mention\": \"236\",      \"MSP_id\": \"14091\",      \"url\": \"http://www.scottish.parliament.uk/images/MSPs and office holders Session 4/JohnScottMSP20110509.JPG\",      \"total_interventions\": \"1661\",      \"party\": \"Scottish Conservative and Unionist Party\"    }  ]}";
+
 
 var geojson = L.geoJson(constituencies, {
     style: style,
@@ -65,12 +66,11 @@ var InfoControl = L.Control.extend({
         if (results) {
         sel_constituency = JSON.parse(results);
 
-        console.log(sel_constituency);
+        this._div.innerHTML =
 
-        this._div.innerHTML =  "<b>"+constituency+"</b>"
-        ;
-
-
+        "<h4>"+constituency+"</h4>" +
+        "<br/>" +
+        "<img src=\"" + sel_constituency.result[0].url.replace(' ','%20') + "\"/>";
         }
     }
 });
@@ -128,6 +128,7 @@ function highlightFeature(e) {
         info.update(result, constituency);
         }
     });
+    //info.update(request_data, constituency); //test purposes
 
 }
 
