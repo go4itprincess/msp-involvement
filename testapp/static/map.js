@@ -3,6 +3,8 @@ var flag = 'rank_gen';
 $(".button-top").on('click', function(e) {
     e.stopPropagation();
     var element = $(e.currentTarget);
+    $(".button-top-selected").removeClass("button-top-selected");
+    element.addClass("button-top-selected");
     flag = element.attr('id');
     map.removeLayer(geojson);
     geojson = L.geoJson(constituencies, {
