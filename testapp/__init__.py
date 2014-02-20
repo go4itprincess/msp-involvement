@@ -40,7 +40,7 @@ def const_info(constituency):
             m.mentions_percentage_of_total_text,
             m.percentage_of_interventions_with_mention,
             m.id,
-            GROUP_CONCAT(DISTINCT CONCAT("[\\\"", w.word, "\\\",", w.weight, "]") SEPARATOR ', ')
+            GROUP_CONCAT(DISTINCT CONCAT("[\\\"", w.word, "\\\",", w.weight, "]") SEPARATOR ', '),
             AVG(s_cri.2006*1+s_cri.2009*2+s_cri.2012*7)/6505*10 AS rank_cri,
             AVG(s_ed.2006*1+s_ed.2009*2+s_ed.2012*7)/6505*10 AS rank_ed,
             AVG(s_emp.2006*1+s_emp.2009*2+s_emp.2012*7)/6505*10 AS rank_emp,
