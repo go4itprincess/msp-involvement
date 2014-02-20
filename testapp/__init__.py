@@ -79,7 +79,7 @@ def const_info(constituency):
             'total_interventions': row[5],
             'avg_intervention_len': row[6],
             'total_mentions_of_constituency': row[7],
-            'interventions_with_mention' : row[8],
+            'interventions_with_mention': row[8],
             'mentions_percentage_of_total_text': row[9],
             'percentage_of_interventions_with_mention': row[10],
             'words': "[{0}]".format(row[12]),
