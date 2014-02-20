@@ -3,11 +3,7 @@ var map = L.map('map', {
         zoom: 6,
         minZoom: 5
         });
-map.on({
-       zoomstart: onZoomStart,
-       zoomend: onZoomEnd,
-       move: onMove
-       });
+
 map.setMaxBounds(L.latLngBounds(L.latLng(50.0,-20.0),L.latLng(65.0,15.0)));
 
 // add an OpenStreetMap tile layer
@@ -134,11 +130,8 @@ var InfoControl = L.Control.extend({
     onAdd: function (map) {
         this._div = L.DomUtil.create('div', 'info');
         this.update();
-        this.locked = false;
         return this._div;
     },
-
-    locked: false,
 
     update: function (results, constituency) {
 
@@ -216,56 +209,27 @@ function highlightFeature(e) {
     }
     constituency = layer.feature.properties.name
 
-    if (!info.locked) {
-        $.ajax({
-            url:"/constituency/" + constituency,
-            success: function(result) {
-                info.update(result, constituency);
-            },
-            error: function() {
-                info.update(request_data, constituency); //test purposes
-            }
-        });
-    }
+    $.ajax({
+        url:"/constituency/" + constituency,
+        success: function(result) {
+            info.update(result, constituency);
+        },
+        error: function() {
+            info.update(request_data, constituency); //test purposes
+        }
+    });
 }
 
 
 
 function resetHighlight(e) {
-
-
-    if (!info.locked) {
-        geojson.resetStyle(e.target);
-        info.update();
-    }
+    geojson.resetStyle(e.target);
+    info.update();
 }
 
 function onClick(e) {
-
     map.fitBounds(e.target.getBounds());
-    info.locked = false;
     highlightFeature(e);
-    info.locked = true;
-
-//    info.locked = false;
-//    var defer = $.Deferred(), deferred_fit = defer.then(map.fitBounds);
-//    defer.resolve(e.target.getBounds());
-//    deferred_fit.done(function() {
-//    highlightFeature(e);info.locked = true});
-}
-
-function onZoomEnd(e) {
-    console.log("zoom ended");
-}
-
-function onZoomStart(e) {
-    info.locked = false;
-    console.log("zoom changed");
-}
-
-function onMove(e) {
-    info.locked = false;
-    console.log("map moved");
 }
 
 function onEachFeature(feature, layer) {
