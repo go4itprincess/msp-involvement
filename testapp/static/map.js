@@ -71,6 +71,8 @@ var InfoControl = L.Control.extend({
         "<h4>"+constituency+"</h4>" +
         "<br/>" +
         "<img src=\"" + sel_constituency.result[0].url.replace(' ','%20') + "\"/>";
+        } else {
+         this._div.innerHTML = "";
         }
     }
 });
@@ -128,7 +130,7 @@ function highlightFeature(e) {
         info.update(result, constituency);
         }
     });
-    //info.update(request_data, constituency); //test purposes
+    info.update(request_data, constituency); //test purposes
 
 }
 
