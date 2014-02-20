@@ -70,13 +70,13 @@ var geojson = L.geoJson(constituencies, {
  var fill = d3.scale.category20();
  var tagXsize=300;
  var tagYsize=200;
- var drawTagCloudOn=0;
+
 
   function draw(words) {
     // d3.select("body").append("svg")
     // console.log("drawing");
     // d3.select(map.getPanes().overlayPane).append("svg")
-    d3.select(drawTagCloudOn).select("svg")
+    d3.select(".info").select("svg")
     // d3.select(".info").append("svg")
         .attr("width", tagXsize)
         .attr("height", tagYsize)
@@ -98,32 +98,6 @@ var geojson = L.geoJson(constituencies, {
   }
 
 
-function htmlForMSP(data) {
-    // <span style='padding-left:12px;'>
-        res="<span class='infotext'> MSP "+data.name+" "+data.surname+"</span>"+
-        "<span class='infotext'> Total interventions: "+data.total_interventions+"</span>"+
-        "<span class='infotext'> Average words spoken: "+data.avg_intervention_len+"</span>"+
-        // "<span class='infotext'> total_mentions_of_constituency: "+data.total_mentions_of_constituency+"</span>"+
-        "<span class='infotext'> Interventions about constituency: "+data.interventions_with_mention+"</span>"+
-        "<img src=\"" + sel_constituency.result[0].url.replace(' ','%20') + "\"/>"+
-        "<svg > </svg>" ;
-        return res;
-}
-
-function paintTagCloud(element) {
-        drawTagCloudOn=element;
-        d3.layout.cloud().size([tagXsize, tagYsize])
-          .words(
-            words.map(function(d){return {text: d[0], size: (d[1]*50)+5};}))
-          .padding(5)
-          .rotate(function() { return 0/*~~(Math.random() * 2) * 90*/;})
-          .font("Impact")
-          .fontSize(function(d) { return d.size; })
-          .on("end", draw)
-          .start();
-
-}
-
 // control that shows state info on hover
 var InfoControl = L.Control.extend({
 
@@ -143,7 +117,7 @@ var InfoControl = L.Control.extend({
     update: function (results, constituency) {
 
         if (results) {
-        sel_constituency = JSON.parse(results);
+        sel_constituency = results;
 
         // console.log(results);
 
@@ -152,14 +126,26 @@ var InfoControl = L.Control.extend({
 
         this._div.innerHTML =
 
-        "<div id=msp1><h4>"+constituency+"</h4>" +
-        htmlForMSP(sel_constituency.result[0]) +
-        "</div>";
-        paintTagCloud("#msp1");
+        "<h4>"+constituency+"</h4>" +
+        "<span class='infotext'> MSP "+sel_constituency.result[0].name+" "+sel_constituency.result[0].surname+"</span>"+
+        "<img src=\"" + sel_constituency.result[0].url.replace(' ','%20') + "\"/>"+
+        "<svg > </svg>" 
+        ;
 
 
-        // this._div.style.height= (parseInt(tempHeight) + tagXsize) +"px";
-        // this._div..style.width= (parseInt(tempWidth) + tagYsize) + "px";
+
+      d3.layout.cloud().size([tagXsize, tagYsize])
+          .words(
+            words.map(function(d){return {text: d[0], size: (d[1]*50)+5};}))
+          .padding(5)
+          .rotate(function() { return 0/*~~(Math.random() * 2) * 90*/;})
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw)
+          .start();
+
+          el.style.height= (parseInt(tempHeight) + 1) +"px";
+el.style.width= (parseInt(tempWidth) + 1) + "px";
 
         } else {
          this._div.innerHTML = "<p>Hover over a constituency.</p>";
@@ -222,11 +208,12 @@ function highlightFeature(e) {
             success: function(result) {
                 info.update(result, constituency);
             },
-            failure: function() {
+            error: function() {
                 info.update(request_data, constituency); //test purposes
             }
         });
     }
+
 }
 
 
@@ -241,17 +228,13 @@ function resetHighlight(e) {
 }
 
 function onClick(e) {
-
-    map.fitBounds(e.target.getBounds());
     info.locked = false;
-    highlightFeature(e);
-    info.locked = true;
-
-//    info.locked = false;
-//    var defer = $.Deferred(), deferred_fit = defer.then(map.fitBounds);
-//    defer.resolve(e.target.getBounds());
-//    deferred_fit.done(function() {
-//    highlightFeature(e);info.locked = true});
+    var defer = $.Deferred(), deferred_fit = defer.then(function(e, map){map.fitBounds(e.target.getBounds())});
+    defer.resolve(e, map);
+    deferred_fit.done(function() {
+        highlightFeature(e);
+        info.locked = true
+    });
 }
 
 function onZoomEnd(e) {
