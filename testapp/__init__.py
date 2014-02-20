@@ -43,13 +43,13 @@ def const_info(constituency):
             m.percentage_of_interventions_with_mention,
             m.id,
             GROUP_CONCAT(DISTINCT CONCAT("[\\\"", w.word, "\\\",", w.weight, "]") SEPARATOR ', '),
-            AVG(s_cri.2006*1+s_cri.2009*2+s_cri.2012*7)/6505*10 AS rank_cri,
-            AVG(s_ed.2006*1+s_ed.2009*2+s_ed.2012*7)/6505*10 AS rank_ed,
-            AVG(s_emp.2006*1+s_emp.2009*2+s_emp.2012*7)/6505*10 AS rank_emp,
-            AVG(s_geo.2006*1+s_geo.2009*2+s_geo.2012*7)/6505*10 AS rank_geo,
-            AVG(s_hea.2006*1+s_hea.2009*2+s_hea.2012*7)/6505*10 AS rank_hea,
-            AVG(s_hou.2006*1+s_hou.2009*2+s_hou.2012*7)/6505*10 AS rank_hou,
-            AVG(s_inc.2006*1+s_inc.2009*2+s_inc.2012*7)/6505*10 AS rank_inc
+            (AVG(s_cri.2006*1+s_cri.2009*2+s_cri.2012*7)/6505*10-9)/84*100 AS rank_cri,
+            (AVG(s_ed.2006*1+s_ed.2009*2+s_ed.2012*7)/6505*10-9)/84*100 AS rank_ed,
+            (AVG(s_emp.2006*1+s_emp.2009*2+s_emp.2012*7)/6505*10-9)/84*100 AS rank_emp,
+            (AVG(s_geo.2006*1+s_geo.2009*2+s_geo.2012*7)/6505*10-9)/84*100 AS rank_geo,
+            (AVG(s_hea.2006*1+s_hea.2009*2+s_hea.2012*7)/6505*10-9)/84*100 AS rank_hea,
+            (AVG(s_hou.2006*1+s_hou.2009*2+s_hou.2012*7)/6505*10-9)/84*100 AS rank_hou,
+            (AVG(s_inc.2006*1+s_inc.2009*2+s_inc.2012*7)/6505*10-9)/84*100 AS rank_inc
         FROM constituencies c
         LEFT JOIN MSPs m ON c.name=m.constituency
         LEFT JOIN datazones d ON c.id = d.constituency
@@ -108,46 +108,46 @@ def get_stats():
     fields = {'c_id':'c.id', 'c_name':'c.name'}
 
     if ("rank_gen" in categories) or (len(categories)==0):
-        fields['rank_gen']="AVG(s_gen.2006*1+s_gen.2009*2+s_gen.2012*7)/6505*10 AS rank_gen"
+        fields['rank_gen']="(AVG(s_gen.2006*1+s_gen.2009*2+s_gen.2012*7)/6505*10-9)/84*100 AS rank_gen"
         
     if ("rank_cri" in categories) or (len(categories)==0):
-        fields['rank_cri']="AVG(s_cri.2006*1+s_cri.2009*2+s_cri.2012*7)/6505*10 AS rank_cri"
+        fields['rank_cri']="(AVG(s_cri.2006*1+s_cri.2009*2+s_cri.2012*7)/6505*10-9)/84*100 AS rank_cri"
         
     if ("rank_ed" in categories) or (len(categories)==0):
-        fields['rank_ed']="AVG(s_ed.2006*1+s_ed.2009*2+s_ed.2012*7)/6505*10 AS rank_ed"
+        fields['rank_ed']="(AVG(s_ed.2006*1+s_ed.2009*2+s_ed.2012*7)/6505*10-9)/84*100 AS rank_ed"
         
     if ("rank_emp" in categories) or (len(categories)==0):
-        fields['rank_emp']="AVG(s_emp.2006*1+s_emp.2009*2+s_emp.2012*7)/6505*10 AS rank_emp"
+        fields['rank_emp']="(AVG(s_emp.2006*1+s_emp.2009*2+s_emp.2012*7)/6505*10-9)/84*100 AS rank_emp"
         
     if ("rank_geo" in categories) or (len(categories)==0):
-        fields['rank_geo']="AVG(s_geo.2006*1+s_geo.2009*2+s_geo.2012*7)/6505*10 AS rank_geo"
+        fields['rank_geo']="(AVG(s_geo.2006*1+s_geo.2009*2+s_geo.2012*7)/6505*10-9)/84*100 AS rank_geo"
         
     if ("rank_gen" in categories) or (len(categories)==0):
-        fields['rank_hea']="AVG(s_hea.2006*1+s_hea.2009*2+s_hea.2012*7)/6505*10 AS rank_hea"
+        fields['rank_hea']="(AVG(s_hea.2006*1+s_hea.2009*2+s_hea.2012*7)/6505*10-9)/84*100 AS rank_hea"
         
     if ("rank_hou" in categories) or (len(categories)==0):
-        fields['rank_hou']="AVG(s_hou.2006*1+s_hou.2009*2+s_hou.2012*7)/6505*10 AS rank_hou"
+        fields['rank_hou']="(AVG(s_hou.2006*1+s_hou.2009*2+s_hou.2012*7)/6505*10-9)/84*100 AS rank_hou"
         
     if ("rank_inc" in categories) or (len(categories)==0):
-        fields['rank_inc']="AVG(s_inc.2006*1+s_inc.2009*2+s_inc.2012*7)/6505*10 AS rank_inc"
+        fields['rank_inc']="(AVG(s_inc.2006*1+s_inc.2009*2+s_inc.2012*7)/6505*10-9)/84*100 AS rank_inc"
 
     if ("total_interventions" in categories) or (len(categories)==0):
-        fields['total_interventions']="AVG(m.total_interventions)"
+        fields['total_interventions']="(AVG(m.total_interventions)"
 
     if ("avg_intervention_len" in categories) or (len(categories)==0):
-        fields['avg_intervention_len']="AVG(m.avg_intervention_len)"
+        fields['avg_intervention_len']="(AVG(m.avg_intervention_len)"
 
     if ("total_mentions_of_constituency" in categories) or (len(categories)==0):
-        fields['total_mentions_of_constituency']="AVG(m.total_mentions_of_constituency)"
+        fields['total_mentions_of_constituency']="(AVG(m.total_mentions_of_constituency)"
 
     if ("interventions_with_mention" in categories) or (len(categories)==0):
-        fields['interventions_with_mention']="AVG(m.interventions_with_mention)"
+        fields['interventions_with_mention']="(AVG(m.interventions_with_mention)"
 
     if ("mentions_percentage_of_total_text" in categories) or (len(categories)==0):
-        fields['mentions_percentage_of_total_text']="AVG(m.mentions_percentage_of_total_text)"
+        fields['mentions_percentage_of_total_text']="(AVG(m.mentions_percentage_of_total_text)"
 
     if ("percentage_of_interventions_with_mention" in categories) or (len(categories)==0):
-        fields['percentage_of_interventions_with_mention']="AVG(m.percentage_of_interventions_with_mention)"
+        fields['percentage_of_interventions_with_mention']="(AVG(m.percentage_of_interventions_with_mention)"
 
     db.query("""
         SELECT
