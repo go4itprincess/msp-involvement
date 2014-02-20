@@ -1,4 +1,4 @@
-.demo-pricing {
+.button-top {
 	margin-top: 10px;
 	margin-right: 10px;
 	padding: 14px 21px;
@@ -23,55 +23,55 @@
 	border-radius: 3px;
 	font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
-.demo-pricing:active {
+.button-top:active {
 	padding-top: 15px;
         margin-bottom: -1px;
 }
-.demo-pricing, .demo-pricing:hover, .demo-pricing:active {
+.button-top, .button-top:hover, .button-top:active {
 	outline: 0 none;
 	text-decoration: none;
 	color: #fff;
 }
 
 
-.demo-pricing-1 {
+.button-top-1 {
 	background-color: #3fb8e8;
 	opacity: 0.4;
 	box-shadow:0px 3px 0px 0px #3293ba;
 	
 }
-.demo-pricing-1:hover {
+.button-top-1:hover {
 	background-color: #1baae3;
 	opacity: 1;
 }
-.demo-pricing-1:active {
+.button-top-1:active {
 	box-shadow: 0px 1px 0px 0px #3293ba;
 }
 
 
-.demo-pricing-2 {
+.button-top-2 {
 	background-color: #f06060;
 	opacity: 0.4;
 	box-shadow: 0px 3px 0px 0px #cd1313;
 }
-.demo-pricing-2:hover {
+.button-top-2:hover {
 	background-color: #ed4444;
 	opacity: 1;
 }
-.demo-pricing-2:active {
+.button-top-2:active {
 	box-shadow: 0px 1px 0px 0px #cd1313;
 }
 
-.demo-pricing-3 {
+.button-top-3 {
 	background-color: #ff6a80;
 	opacity: 0.4;
 	box-shadow: 0px 3px 0px 0px #da0020;
 }
-.demo-pricing-3:hover {
+.button-top-3:hover {
 	background-color: #ff566f;
 	opacity: 1;
 }
-.demo-pricing-3:active {
+.button-top-3:active {
 	box-shadow: 0px 1px 0px 0px #da0020;
 }
 

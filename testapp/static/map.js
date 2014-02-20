@@ -1,3 +1,43 @@
+var flag = 'rank_gen';
+
+$(".button-top").on('click', function(e) {
+    e.stopPropagation();
+    var element = $(e.currentTarget);
+    flag = element.attr('id');
+    map.removeLayer(geojson);
+    geojson = L.geoJson(constituencies, {
+        style: style,
+        onEachFeature: onEachFeature
+    }).addTo(map);
+
+});
+
+var percentColors = [
+    { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
+    { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
+    { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } } ];
+
+var getColorForPercentage = function(pct) {
+    for (var i = 1; i < percentColors.length - 1; i++) {
+        if (pct < percentColors[i].pct) {
+            break;
+        }
+    }
+    var lower = percentColors[i - 1];
+    var upper = percentColors[i];
+    var range = upper.pct - lower.pct;
+    var rangePct = (pct - lower.pct) / range;
+    var pctLower = 1 - rangePct;
+    var pctUpper = rangePct;
+    var color = {
+        r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
+        g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
+        b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
+    };
+    return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
+    // or output as hex if preferred
+};
+
 var map = L.map('map', {
         center: L.latLng(56.834, -3.994),
         zoom: 6,
@@ -11,52 +51,7 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a 
 }).addTo(map);
 
 
-
-function buttonClicked(num) {
-    switch(num){
-        case 0:
-
-            break;
-        case 1:
-
-            break;
-        case 2:
-
-            break;
-        case 3:
-
-            break;
-        case 4:
-
-            break;
-        case 5:
-
-            break;
-        case 6:
-
-            break;
-        case 7:
-
-            break;
-    }
-}
-
-
 var request_data =  "{\"result\": [    {      \"surname\": \" Scott\",\"percentage_of_interventions_with_mention\": \"0.14208\",      \"total_mentions_of_constituency\": \"723\",\"words\": \"[[\\\"draft\\\",0.465356], [\\\"swinney\\\",0.454288],[\\\"finance\\\",0.421423], [\\\"order\\\",0.351362], [\\\"local\\\",0.302168], [\\\"item\\\",0.260115], [\\\"finance\\\",0.421423], [\\\"order\\\",0.351362], [\\\"local\\\",0.302168], [\\\"item\\\",0.260115], [\\\"motion\\\",0.247806], [\\\"business\\\",0.235882]]\",\"mentions_percentage_of_total_text\": \"0.00322376\",\"shit\": 1,      \"avg_intervention_len\": \"133.768\",      \"name\": \"John\",      \"rank_c\": \"53.956609546201\",      \"interventions_with_mention\": \"236\",      \"MSP_id\": \"14091\",      \"url\": \"http://www.scottish.parliament.uk/images/MSPs and office holders Session 4/JohnScottMSP20110509.JPG\",      \"total_interventions\": \"1661\",      \"party\": \"Scottish Conservative and Unionist Party\"    }  ]}";
-
-var calibrated = function (list) {
-    max = Math.max.apply(null,list);
-    min = Math.min.apply(null,list);
-    size = (max-min);
-
-    var ret = [];
-    for(var i = 0; i<list.length; i++){
-        ret.push(100*(list[i]-min)/size);
-    }
-
-    return ret;
-}
-
 
 var geojson = L.geoJson(constituencies, {
     style: style,
@@ -165,24 +160,6 @@ var info = new InfoControl();
 
 map.addControl(info);
 
-//Default colour
-var defaultColour = '#507FFF';
-
-// get color depending on percentage value
-function getColor(d) {
-    return d > 90  ? '#FF00FF' :
-           d > 80  ? '#FF1CE3' :
-           d > 70  ? '#FF38C7' :
-           d > 60  ? '#FF55AA' :
-           d > 50  ? '#FF718E' :
-           d > 40  ? '#FF8D72' :
-           d > 30  ? '#FFAA55' :
-           d > 20  ? '#FFC639' :
-           d > 10  ? '#FFE21D' :
-                     '#FFFF00';
-}
-
-
 function style(feature) {
     return {
         weight: 2,
@@ -190,7 +167,7 @@ function style(feature) {
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7,
-        fillColor: getColor(feature.properties.population/1000)
+        fillColor: getColorForPercentage(feature.properties.ranks[flag]/100)
     };
 }
 
@@ -220,8 +197,6 @@ function highlightFeature(e) {
     });
 }
 
-
-
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
     info.update();
@@ -236,7 +211,7 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: onClick,
+        click: onClick
     });
 }
 

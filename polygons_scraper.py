@@ -70,15 +70,17 @@ for constituency in constituencies.values():
         i = 0
         points = []
         for coordinate in coordinates:
-            coordinate = map(float,coordinate.split(',')[:2])
+            coordinate = map(float, coordinate.split(',')[:2])
 
-            if i%10 == 0:
+            if i % 10 == 0:
                 point = [coordinate[0], coordinate[1]]
                 points.append(point)
             i += 1
         pointsList.append([points])
     multipolygon = geojson.MultiPolygon(coordinates=pointsList)
-    feature = geojson.Feature(id=id, geometry=multipolygon, properties={'population': pop, 'name': name, 'ranks': extract(name)})
+    ranks = extract(name)
+    ranks["population"] = 100 - (float(pop) / 1000)
+    feature = geojson.Feature(id=id, geometry=multipolygon, properties={'name': name, 'ranks': ranks})
     feature_list.append(feature)
 feature_collection = geojson.FeatureCollection(features=feature_list)
 
