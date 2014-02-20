@@ -66,31 +66,35 @@ def const_info(constituency):
     r = db.use_result()
     row = r.fetch_row()
     result = []
-    msp = {
-        'MSP_id': row[0][11],
-        'name': row[0][0],
-        'surname': row[0][1],
-        'party': row[0][2],
-        'url': row[0][3],
-        'rank_gen': row[0][4],
-        'total_interventions': row[0][5],
-        'avg_intervention_len': row[0][6],
-        'total_mentions_of_constituency': row[0][7],
-        'interventions_with_mention' : row[0][8],
-        'mentions_percentage_of_total_text': row[0][9],
-        'percentage_of_interventions_with_mention': row[0][10],
-        'words': "[{0}]".format(row[0][12]),
-        'rank_cri': row[0][13],
-        'rank_ed': row[0][13],
-        'rank_emp': row[0][17],
-        'rank_geo': row[0][14],
-        'rank_hea': row[0][15],
-        'rank_hou': row[0][16],
-        'rank_inc': row[0][18]
-    }
+
     while row:
+        row = row[0]
+        msp = {
+            'MSP_id': row[11],
+            'name': row,
+            'surname': row[1],
+            'party': row[2],
+            'url': row[3],
+            'rank_gen': row[4],
+            'total_interventions': row[5],
+            'avg_intervention_len': row[6],
+            'total_mentions_of_constituency': row[7],
+            'interventions_with_mention' : row[8],
+            'mentions_percentage_of_total_text': row[9],
+            'percentage_of_interventions_with_mention': row[10],
+            'words': "[{0}]".format(row[12]),
+            'rank_cri': row[13],
+            'rank_ed': row[13],
+            'rank_emp': row[17],
+            'rank_geo': row[14],
+            'rank_hea': row[15],
+            'rank_hou': row[16],
+            'rank_inc': row[18]
+        }
+
         result += [msp]
         row = r.fetch_row()
+
     result = {'result':result}
     return jsonify(result)
 

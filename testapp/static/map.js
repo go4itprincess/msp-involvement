@@ -200,13 +200,16 @@ function highlightFeature(e) {
     constituency = layer.feature.properties.name
 
     if (!info.locked) {
-        $.ajax({url:"/constituency/" + constituency, success: function(result) {
-            info.update(result, constituency);
+        $.ajax({
+            url:"/constituency/" + constituency,
+            success: function(result) {
+                info.update(result, constituency);
+            },
+            failure: function() {
+                info.update(request_data, constituency); //test purposes
             }
         });
-        info.update(request_data, constituency); //test purposes
     }
-
 }
 
 
