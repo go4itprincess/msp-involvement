@@ -3,6 +3,7 @@ import _mysql
 
 app = Flask(__name__)
 
+# DB connection
 db = _mysql.connect(host="d33028.mysql.zone.ee", user="d33028sa73662", passwd="Hackath0n", db="d33028sd72729")
 
 @app.route("/")
