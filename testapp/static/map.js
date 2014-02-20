@@ -48,6 +48,33 @@ var geojson = L.geoJson(constituencies, {
     onEachFeature: onEachFeature
 }).addTo(map);
 
+ var fill = d3.scale.category20();
+
+  function draw(words) {
+    // d3.select("body").append("svg")
+    // console.log("drawing");
+    // d3.select(map.getPanes().overlayPane).append("svg")
+    d3.select(".info").select("svg")
+    // d3.select(".info").append("svg")
+        .attr("width", 300)
+        .attr("height", 300)
+        // .attr("align","left")
+        // .attr("valign","bottom")
+      .append("g")
+        .attr("transform", "translate(150,150)")
+      .selectAll("text")
+        .data(words)
+      .enter().append("text")
+        .style("font-size", function(d) { return d.size + "px"; })
+        .style("font-family", "Impact")
+        .style("fill", function(d, i) { return fill(i); })
+        .attr("text-anchor", "middle")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        })
+        .text(function(d) { return d.text; });
+  }
+
 
 // control that shows state info on hover
 var InfoControl = L.Control.extend({
@@ -66,11 +93,31 @@ var InfoControl = L.Control.extend({
         if (results) {
         sel_constituency = JSON.parse(results);
 
+        // console.log(results);
+
+         // console.log(sel_constituency.result[0].words);
+         words=JSON.parse(sel_constituency.result[0].words);
+
         this._div.innerHTML =
 
         "<h4>"+constituency+"</h4>" +
         "<br/>" +
-        "<img src=\"" + sel_constituency.result[0].url.replace(' ','%20') + "\"/>";
+        "<span> MSP "+sel_constituency.result[0].name+" "+sel_constituency.result[0].surname+"</span>"+
+        "<br/>" +
+        "<img src=\"" + sel_constituency.result[0].url.replace(' ','%20') + "\"/>"+
+        "<svg style='position:absolute;left:100;'> </svg>" 
+        ;
+
+      d3.layout.cloud().size([500, 500])
+          .words(
+            words.map(function(d){return {text: d[0], size: (d[1]*80)+7};}))
+          .padding(5)
+          .rotate(function() { return 0 /*~~(Math.random() * 2) * 90;*/ })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw)
+          .start();
+
         } else {
          this._div.innerHTML = "";
         }
@@ -148,7 +195,7 @@ function onClick(e) {
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
-        mouseout: resetHighlight,
+        // mouseout: resetHighlight,
         click: onClick
     });
 }
