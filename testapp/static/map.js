@@ -40,7 +40,7 @@ function buttonClicked(num) {
     }
 }
 
-var request_data =  "{\"result\": [    {      \"surname\": \" Scott\",\"percentage_of_interventions_with_mention\": \"0.14208\",      \"total_mentions_of_constituency\": \"723\",\"words\": \"[[\\\"draft\\\",0.465356], [\\\"swinney\\\",0.454288], [\\\"finance\\\",0.421423], [\\\"order\\\",0.351362], [\\\"local\\\",0.302168], [\\\"item\\\",0.260115], [\\\"motion\\\",0.247806], [\\\"business\\\",0.235882]]\",\"mentions_percentage_of_total_text\": \"0.00322376\",\"shit\": 1,      \"avg_intervention_len\": \"133.768\",      \"name\": \"John\",      \"rank_c\": \"53.956609546201\",      \"interventions_with_mention\": \"236\",      \"MSP_id\": \"14091\",      \"url\": \"http://www.scottish.parliament.uk/images/MSPs and office holders Session 4/JohnScottMSP20110509.JPG\",      \"total_interventions\": \"1661\",      \"party\": \"Scottish Conservative and Unionist Party\"    }  ]}";
+var request_data =  "{\"result\": [    {      \"surname\": \" Scott\",\"percentage_of_interventions_with_mention\": \"0.14208\",      \"total_mentions_of_constituency\": \"723\",\"words\": \"[[\\\"draft\\\",0.465356], [\\\"swinney\\\",0.454288],[\\\"finance\\\",0.421423], [\\\"order\\\",0.351362], [\\\"local\\\",0.302168], [\\\"item\\\",0.260115], [\\\"finance\\\",0.421423], [\\\"order\\\",0.351362], [\\\"local\\\",0.302168], [\\\"item\\\",0.260115], [\\\"motion\\\",0.247806], [\\\"business\\\",0.235882]]\",\"mentions_percentage_of_total_text\": \"0.00322376\",\"shit\": 1,      \"avg_intervention_len\": \"133.768\",      \"name\": \"John\",      \"rank_c\": \"53.956609546201\",      \"interventions_with_mention\": \"236\",      \"MSP_id\": \"14091\",      \"url\": \"http://www.scottish.parliament.uk/images/MSPs and office holders Session 4/JohnScottMSP20110509.JPG\",      \"total_interventions\": \"1661\",      \"party\": \"Scottish Conservative and Unionist Party\"    }  ]}";
 
 
 var geojson = L.geoJson(constituencies, {
@@ -49,6 +49,9 @@ var geojson = L.geoJson(constituencies, {
 }).addTo(map);
 
  var fill = d3.scale.category20();
+ var tagXsize=400;
+ var tagYsize=200;
+
 
   function draw(words) {
     // d3.select("body").append("svg")
@@ -56,12 +59,12 @@ var geojson = L.geoJson(constituencies, {
     // d3.select(map.getPanes().overlayPane).append("svg")
     d3.select(".info").select("svg")
     // d3.select(".info").append("svg")
-        .attr("width", 300)
-        .attr("height", 300)
+        .attr("width", tagXsize)
+        .attr("height", tagYsize)
         // .attr("align","left")
         // .attr("valign","bottom")
       .append("g")
-        .attr("transform", "translate(150,150)")
+        .attr("transform", "translate("+tagXsize/2+","+tagYsize/2+")")
       .selectAll("text")
         .data(words)
       .enter().append("text")
@@ -108,11 +111,11 @@ var InfoControl = L.Control.extend({
         "<svg style='position:absolute;left:100;'> </svg>" 
         ;
 
-      d3.layout.cloud().size([500, 500])
+      d3.layout.cloud().size([tagXsize, tagYsize])
           .words(
-            words.map(function(d){return {text: d[0], size: (d[1]*80)+7};}))
+            words.map(function(d){return {text: d[0], size: (d[1]*50)+5};}))
           .padding(5)
-          .rotate(function() { return 0 /*~~(Math.random() * 2) * 90;*/ })
+          .rotate(function() { return ~~(Math.random() * 2) * 90;})
           .font("Impact")
           .fontSize(function(d) { return d.size; })
           .on("end", draw)
@@ -195,7 +198,7 @@ function onClick(e) {
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
-        // mouseout: resetHighlight,
+        mouseout: resetHighlight,
         click: onClick
     });
 }
