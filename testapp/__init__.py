@@ -22,6 +22,11 @@ def get_js(filename):
 @app.route("/<filename>.json")
 def get_json(filename):
     return app.send_static_file(filename + '.json')
+	
+	
+@app.route("/<filename>.ico")
+def get_ico(filename):
+    return app.send_static_file(filename + '.ico')
 
 
 @app.route("/constituency/<string:constituency>")
