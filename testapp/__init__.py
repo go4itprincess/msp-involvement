@@ -71,7 +71,7 @@ def const_info(constituency):
         row = row[0]
         msp = {
             'MSP_id': row[11],
-            'name': row,
+            'name': row[0],
             'surname': row[1],
             'party': row[2],
             'url': row[3],
