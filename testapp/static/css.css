@@ -1,7 +1,3 @@
-
-/* Button code */
-
-
 .demo-pricing {
 	margin-top: 10px;
 	margin-right: 10px;
@@ -79,11 +75,13 @@
 	box-shadow: 0px 1px 0px 0px #da0020;
 }
 
-
+html {
+    height: 95%;
+}
 
 body {
 	padding: 0;
-	height:auto;
+	height:100%;
 	background: -webkit-linear-gradient(#EEEEFF, #FFFFFF); /* For Safari */
 	background: -o-linear-gradient(#EEEEFF, #FFFFFF); /* For Opera 11.1 to 12.0 */
 	background: -moz-linear-gradient(#EEEEFF, #FFFFFF); /* For Firefox 3.6 to 15 */
@@ -96,7 +94,7 @@ body {
 #map {
 	position: relative;
 	min-height:500px;
-	height: 90%;
+	height: 100%;
 	}
 
 #buttons {
