@@ -76,7 +76,7 @@
 }
 
 html {
-    height: 95%;
+    height: 97%;
 }
 
 body {
@@ -106,10 +106,12 @@ body {
 
 .search-wrapper {
 	position: fixed;
+	top:20px;
 	right: -70px;
 	}
 	
 .search-wrapper:hover {
+	top:20px;
 	right: 70px;
 	}
 	
@@ -122,3 +124,9 @@ body {
 #searchbar {
 	width: 100px;
 	}
+
+.info {
+    position: relative;
+    bottom: 20px;
+    left: 20px;
+}

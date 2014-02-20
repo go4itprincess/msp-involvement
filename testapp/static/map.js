@@ -9,20 +9,38 @@ map.setMaxBounds(L.latLngBounds(L.latLng(50.0,-20.0),L.latLng(65.0,15.0)));
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-//var constituencies = [];
-//var polygons = [];
-
-/*$.getJSON("constituencies_polygons.js", function (data) {
-	constituencies = data;
-	console.log(constituencies[0].polygon);
-	for(var i = 0; i<Object.keys(constituencies).length; i++){
-		polygons[i] = L.multiPolygon(constituencies[i].polygon).addTo(map);
-		polygons[i].bindPopup("<b>" + constituencies[i].name + "</b>")
-	}
-});
-*/
 
 
+function buttonClicked(num) {
+    switch(num){
+        case 0:
+
+            break;
+        case 1:
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+        case 5:
+
+            break;
+        case 6:
+
+            break;
+        case 7:
+
+            break;
+    }
+}
+
+var request_data =  "{\"result\": [{\"surname\": \" Gibson\", \"percentage_of_interventions_with_mention\": \"0.00227\", \"total_mentions_of_constituency\": \"3\", \"words\": \"[['uk',0.307912], ['miller',0.234796], ['farming',0.224131], ['support',0.204922], ['cap',0.172721], ['vital',0.160378], ['farm',0.154422], ['funding',0.146016], ['production',0.145559], ['ball',0.128258], ['coupling',0.128258], ['eustice',0.128258], ['gaindykehead',0.128258], ['lever',0.128258], ['nigel',0.128258], ['airdrie',0.121905], ['stunning',0.121905], ['debacle',0.117398], ['hectare',0.113902], ['paterson',0.113902], ['competitors',0.111045], ['convergence',0.111045], ['coupled',0.111045], ['owen',0.111045], ['rough',0.111045], ['defra',0.10863], ['edition',0.10863], ['pressures',0.10863], ['dig',0.106538], ['door',0.106538], ['farmer',0.106538], ['grazing',0.106538], ['burns',0.104693], ['implementation',0.104693], ['leadership',0.104693], ['nfu',0.104693], ['controlled',0.101549], ['played',0.0989313], ['double',0.0966892], ['southern',0.0966892], ['targeted',0.0966892], ['actions',0.095678], ['budgets',0.0929855], ['george',0.0921819], ['remove',0.0899922], ['brown',0.0893253], ['foundation',0.0893]\", \"mentions_percentage_of_total_text\": \"0.00000983539\", \"shit\": 1, \"avg_intervention_len\": \"228.966\", \"name\": \"Rob\", \"rank_c\": \"45.106429904783\", \"interventions_with_mention\": \"3\", \"MSP_id\": \"13993\", \"url\": \"http://www.scottish.parliament.uk/images/MSPs and office holders Session 4/RobGibsonMSP20110510.JPG\", \"total_interventions\": \"1321\", \"party\": \"Scottish National Party\"}]}"
 
 var geojson = L.geoJson(constituencies, {
     style: style,
@@ -31,34 +49,53 @@ var geojson = L.geoJson(constituencies, {
 
 
 // control that shows state info on hover
-var info = L.control();
+var InfoControl = L.Control.extend({
 
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info');
-    this.update();
-    return this._div;
-};
+    options: {
+        position: 'bottomleft'
+    },
 
-info.update = function (results, constituency) {
-    if (results) {this._div.innerHTML =  constituency + results;}
-};
+    onAdd: function (map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    },
 
-info.addTo(map);
+    update: function (results, constituency) {
+        if (results) {
+        sel_constituency = JSON.parse(results);
 
+        console.log(sel_constituency);
+
+        this._div.innerHTML =  "<b>"+constituency+"</b>"
+        ;
+
+
+        }
+    }
+});
+
+var info = new InfoControl();
+
+map.addControl(info);
+
+//Default colour
+var defaultColour = '#507FFF';
 
 // get color depending on percentage value
 function getColor(d) {
-    return d > 90  ? '#800026' :
-           d > 80  ? '#BD0026' :
-           d > 70  ? '#E31A1C' :
-           d > 60  ? '#FC4E2A' :
-           d > 50  ? '#FD8D3C' :
-           d > 40  ? '#FEB24C' :
-           d > 30  ? '#FED976' :
-           d > 20  ? '#FED976' :
-           d > 10  ? '#FED976' :
-                     '#FFEDA0';
+    return d > 90  ? '#FF00FF' :
+           d > 80  ? '#FF1CE3' :
+           d > 70  ? '#FF38C7' :
+           d > 60  ? '#FF55AA' :
+           d > 50  ? '#FF718E' :
+           d > 40  ? '#FF8D72' :
+           d > 30  ? '#FFAA55' :
+           d > 20  ? '#FFC639' :
+           d > 10  ? '#FFE21D' :
+                     '#FFFF00';
 }
+
 
 function style(feature) {
     return {
@@ -85,6 +122,8 @@ function highlightFeature(e) {
         layer.bringToFront();
     }
     constituency = layer.feature.properties.name
+
+
     $.ajax({url:"/constituency/" + constituency, success: function(result) {
         info.update(result, constituency);
         }
@@ -111,28 +150,3 @@ function onEachFeature(feature, layer) {
     });
 }
 
-
-
-var legend = L.control({position: 'bottomright'});
-
-legend.onAdd = function (map) {
-
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        labels = [],
-        from, to;
-
-    for (var i = 0; i < grades.length; i++) {
-        from = grades[i];
-        to = grades[i + 1];
-
-        labels.push(
-            '<i style="background:' + getColor(from + 1) + '"></i> ' +
-            from + (to ? '&ndash;' + to : '+'));
-    }
-
-    div.innerHTML = labels.join('<br>');
-    return div;
-};
-
-legend.addTo(map);
