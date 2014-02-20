@@ -66,31 +66,35 @@ def const_info(constituency):
     r = db.use_result()
     row = r.fetch_row()
     result = []
-    msp = {
-        'MSP_id': row[0][11],
-        'name': row[0][0],
-        'surname': row[0][1],
-        'party': row[0][2],
-        'url': row[0][3],
-        'rank_gen': row[0][4],
-        'total_interventions': row[0][5],
-        'avg_intervention_len': row[0][6],
-        'total_mentions_of_constituency': row[0][7],
-        'interventions_with_mention' : row[0][8],
-        'mentions_percentage_of_total_text': row[0][9],
-        'percentage_of_interventions_with_mention': row[0][10],
-        'words': "[{0}]".format(row[0][12]),
-        'rank_cri': row[0][13],
-        'rank_ed': row[0][13],
-        'rank_emp': row[0][17],
-        'rank_geo': row[0][14],
-        'rank_hea': row[0][15],
-        'rank_hou': row[0][16],
-        'rank_inc': row[0][18]
-    }
+
     while row:
+        row = row[0]
+        msp = {
+            'MSP_id': row[11],
+            'name': row,
+            'surname': row[1],
+            'party': row[2],
+            'url': row[3],
+            'rank_gen': row[4],
+            'total_interventions': row[5],
+            'avg_intervention_len': row[6],
+            'total_mentions_of_constituency': row[7],
+            'interventions_with_mention' : row[8],
+            'mentions_percentage_of_total_text': row[9],
+            'percentage_of_interventions_with_mention': row[10],
+            'words': "[{0}]".format(row[12]),
+            'rank_cri': row[13],
+            'rank_ed': row[13],
+            'rank_emp': row[17],
+            'rank_geo': row[14],
+            'rank_hea': row[15],
+            'rank_hou': row[16],
+            'rank_inc': row[18]
+        }
+
         result += [msp]
         row = r.fetch_row()
+
     result = {'result':result}
     return jsonify(result)
 
@@ -101,8 +105,29 @@ def get_stats():
     categories = request.form.getlist('categories[]')
     fields = {'c_id':'c.id', 'c_name':'c.name'}
 
-    if ("rank" in categories) or (len(categories)==0):
-        fields['rank']="AVG(simd.2006*1+simd.2009*2+simd.2012*7)/6505*10 AS rank"
+    if ("rank_gen" in categories) or (len(categories)==0):
+        fields['rank_gen']="AVG(s_gen.2006*1+s_gen.2009*2+s_gen.2012*7)/6505*10 AS rank_gen"
+        
+    if ("rank_cri" in categories) or (len(categories)==0):
+        fields['rank_cri']="AVG(s_cri.2006*1+s_cri.2009*2+s_cri.2012*7)/6505*10 AS rank_cri"
+        
+    if ("rank_ed" in categories) or (len(categories)==0):
+        fields['rank_ed']="AVG(s_ed.2006*1+s_ed.2009*2+s_ed.2012*7)/6505*10 AS rank_ed"
+        
+    if ("rank_emp" in categories) or (len(categories)==0):
+        fields['rank_emp']="AVG(s_emp.2006*1+s_emp.2009*2+s_emp.2012*7)/6505*10 AS rank_emp"
+        
+    if ("rank_geo" in categories) or (len(categories)==0):
+        fields['rank_geo']="AVG(s_geo.2006*1+s_geo.2009*2+s_geo.2012*7)/6505*10 AS rank_geo"
+        
+    if ("rank_gen" in categories) or (len(categories)==0):
+        fields['rank_hea']="AVG(s_hea.2006*1+s_hea.2009*2+s_hea.2012*7)/6505*10 AS rank_hea"
+        
+    if ("rank_hou" in categories) or (len(categories)==0):
+        fields['rank_hou']="AVG(s_hou.2006*1+s_hou.2009*2+s_hou.2012*7)/6505*10 AS rank_hou"
+        
+    if ("rank_inc" in categories) or (len(categories)==0):
+        fields['rank_inc']="AVG(s_inc.2006*1+s_inc.2009*2+s_inc.2012*7)/6505*10 AS rank_inc"
 
     if ("total_interventions" in categories) or (len(categories)==0):
         fields['total_interventions']="AVG(m.total_interventions)"
@@ -129,7 +154,14 @@ def get_stats():
         FROM constituencies c
         LEFT JOIN MSPs m ON c.name=m.constituency
         LEFT JOIN datazones d ON c.id = d.constituency
-        LEFT JOIN simd_general simd on simd.datazone = d.code
+        LEFT JOIN simd_general s_gen on s_gen.datazone = d.code
+        LEFT JOIN simd_crime s_cri on s_cri.datazone = d.code
+        LEFT JOIN simd_education s_ed on s_ed.datazone = d.code
+        LEFT JOIN simd_employment s_emp on s_emp.datazone = d.code
+        LEFT JOIN simd_geoacc s_geo on s_geo.datazone = d.code
+        LEFT JOIN simd_health s_hea on s_hea.datazone = d.code
+        LEFT JOIN simd_housing s_hou on s_hou.datazone = d.code
+        LEFT JOIN simd_income s_inc on s_inc.datazone = d.code
         GROUP BY c.id
     """.format(fields=' , '.join(fields.values())))
 
