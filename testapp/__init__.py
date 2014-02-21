@@ -46,7 +46,6 @@ def const_info(constituency):
         return cache
 
     db.query("""
-        SET GLOBAL VARIABLE group_concat_max_len=8192;
         SELECT
             m.name,
             m.surname,
