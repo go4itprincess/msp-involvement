@@ -97,6 +97,7 @@ window.currentData=0;  // Stores the area that we most recently hovered over
 
 
 function htmlForMSP(data,region) {
+//    console.log(data)
     // <span style='padding-left:12px;'>
         res="<span class='mspname'> MSP "+data.name+" "+data.surname+"</span>"+
         "<span class='infotext'>("+region+")</span>"+
@@ -136,6 +137,7 @@ function paintLightBox() {
             // console.log(result);
             data=result.result;
             // console.log(data);
+//            console.log(window.currentData);
             content="<div class='constdiv'>"+ barHTML(window.currentData.result[0], window.currentData.result[0].region)+
             "</div>";
 
@@ -171,7 +173,7 @@ function paintLightBox() {
             var left = ($(window).width() / 2) - ($(".fancybox-wrap").outerWidth() / 2);
             $(".fancybox-wrap").css({ top: top, left: left});
             var height=$(".fancybox-wrap").outerHeight()-20;
-            // console.log(height);
+//            console.log(height);
             $(".mpsdiv").css({"height": height});
         }).trigger('resize');
 
@@ -199,21 +201,24 @@ var InfoControl = L.Control.extend({
     },
 
     update: function (results, constituency) {
-
+console.log(results)
         if (results) {
-        sel_constituency = results;
+            sel_constituency = results;
 
+            if (sel_constituency.result[0].words == "[None]") {
+                words = [];
+            } else {
+                words=JSON.parse(sel_constituency.result[0].words);
+            }
 
-        words=JSON.parse(sel_constituency.result[0].words);
-
-        this._div.innerHTML =
-        "<div id=msp1><h4>"+constituency+"</h4>" +
-        htmlForMSP(sel_constituency.result[0],sel_constituency.result[0].party) +
-        "</div>";
-        paintTagCloud("#msp1", words);
+            this._div.innerHTML =
+            "<div id=msp1><h4>"+constituency+"</h4>" +
+            htmlForMSP(sel_constituency.result[0],sel_constituency.result[0].party) +
+            "</div>";
+            paintTagCloud("#msp1", words);
 
         } else {
-         this._div.innerHTML = "<p>Hover over a constituency.</p>";
+            this._div.innerHTML = "<p>Hover over a constituency.</p>";
         }
 
     }
@@ -279,7 +284,7 @@ function highlightFeature(e) {
 
                 });
 
-
+//console.log("/constituency/" + constituency)
     $.ajax({
         // url:"/example2.json",
         url:"/constituency/" + constituency,
