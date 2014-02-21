@@ -116,7 +116,7 @@ def const_info(constituency):
 
     result = {'result':result}
 
-    with open("/var/www/ilwhack/testapp/static/cache/r_"+secure_filename(constituency),"w") as fo:
+    with open("/var/www/ilwhack/testapp/static/cache/c_"+secure_filename(constituency),"w") as fo:
         fo.write(json.dumps(result))
 
     return jsonify(result)
@@ -181,7 +181,7 @@ def region_info(constituency):
 
     result = {'result':result}
 
-    with open("/var/www/ilwhack/testapp/static/cache/c_"+secure_filename(constituency),"w") as fo:
+    with open("/var/www/ilwhack/testapp/static/cache/r_"+secure_filename(constituency),"w") as fo:
         fo.write(json.dumps(result))
 
     return jsonify(result)
