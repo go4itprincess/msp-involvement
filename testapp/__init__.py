@@ -43,7 +43,7 @@ def get_ico(filename):
 def const_info(constituency):
     cache = check_cache("c_"+secure_filename(constituency))
     if cache != False:
-        return cache
+        return jsonify(json.loads(cache))
 
     db.query("""
         SELECT
@@ -133,7 +133,7 @@ def const_info(constituency):
 def region_info(constituency):
     cache = check_cache("r_"+secure_filename(constituency))
     if cache != False:
-        return cache
+        return jsonify(json.loads(cache))
 
     db.query("""
         SELECT
@@ -152,7 +152,8 @@ def region_info(constituency):
             GROUP_CONCAT(DISTINCT CONCAT("[\\\"", w.word, "\\\",", w.weight, "]") SEPARATOR ', '),
             c.name,
             c.council,
-            c.region
+            c.region,
+            c.population
         FROM constituencies c
         LEFT JOIN MSPs m ON c.region=m.constituency
         LEFT JOIN MSP_words w ON w.MSP_id = m.id
@@ -185,6 +186,7 @@ def region_info(constituency):
             'constituency': row[13],
             'council': row[14],
             'region': row[15]
+            'population': row[16]
         }
 
         result += [msp]
@@ -203,10 +205,10 @@ def get_stats():
 
     cache = check_cache("stats")
     if cache != False:
-        return cache
+        return jsonify(json.loads(cache))
 
     categories = request.form.getlist('categories[]')
-    fields = {'c_id':'c.id', 'c_name':'c.name', 'c_council':'c.council', 'c_region':'c.region'}
+    fields = {'c_id':'c.id', 'c_name':'c.name', 'c_council':'c.council', 'c_region':'c.region', 'c_population':'c.population'}
 
     if ("rank_gen" in categories) or (len(categories)==0):
         fields['rank_gen']="(AVG(s_gen.2006*1+s_gen.2009*2+s_gen.2012*7)/6505*10-18)/67*100 AS rank_gen"
