@@ -160,7 +160,7 @@ function paintLightBox() {
             paintTagCloud("#msp1", words);
 
             // console.log(data);
-            for (cnt=0;cnt < (data.length+1); cnt++){
+            for (cnt=0;cnt < data.length; cnt++){
                 // words=data[cnt].words;
                 words=JSON.parse(data[cnt].words);
                 paintTagCloud("#msp"+(cnt+2), words);
