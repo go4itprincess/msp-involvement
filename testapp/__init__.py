@@ -104,13 +104,13 @@ def const_info(constituency):
             'percentage_of_interventions_with_mention': row[10],
             'words': "[{0}]".format(row[12]),
             'rank_cri': row[13],
-            'rank_edu': row[13],
-            'rank_emp': row[17],
-            'rank_geo': row[14],
-            'rank_hea': row[15],
-            'rank_hou': row[16],
-            'rank_inc': row[18],
-            'population': row[19]
+            'rank_edu': row[14],
+            'rank_emp': row[15],
+            'rank_geo': row[16],
+            'rank_hea': row[17],
+            'rank_hou': row[18],
+            'rank_inc': row[19],
+            'population': row[20]
         }
 
         result += [msp]
