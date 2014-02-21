@@ -49,7 +49,7 @@ var map = L.map('map', {
 map.setMaxBounds(L.latLngBounds(L.latLng(50.0,-20.0),L.latLng(65.0,15.0)));
 
 // add an OpenStreetMap tile layer
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: ' Data from: <a href="http://www.theyworkforyou.com/">TheyWorkForYou</a>, <a href="http://www.sns.gov.uk/">SNS</a> and <a href="http://mapit.mysociety.org/">MapIt</a> | &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
 
