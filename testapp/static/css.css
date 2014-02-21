@@ -104,6 +104,7 @@ h4 {
 }
 
 .infotext{
+	font-family: "Open Sans", Arial, Helvetica, sans-serif;
 	padding-bottom: 4px;
 	display: block;
 }
@@ -163,4 +164,19 @@ h4 {
 
 .bar-containers{
 	width:500px;
+}
+
+.mpsdiv {
+	float:right;
+	overflow-y: scroll;
+	overflow-x: none;
+	height: 99%;
+}
+
+.constdiv {
+	/*float:left;*/
+	overflow-y: none;
+	overflow-x: none;
+	/*position: absolute;*/
+	/*float: left;*/
 }
