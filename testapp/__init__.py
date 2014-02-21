@@ -67,7 +67,10 @@ def const_info(constituency):
             (AVG(s_hea.2006*1+s_hea.2009*2+s_hea.2012*7)/6505*10-17)/63*100 AS rank_hea,
             (AVG(s_hou.2006*1+s_hou.2009*2+s_hou.2012*7)/6505*10-9)/67*100 AS rank_hou,
             (AVG(s_inc.2006*1+s_inc.2009*2+s_inc.2012*7)/6505*10-18)/62*100 AS rank_inc,
-            c.population
+            c.population,
+            c.name,
+            c.council,
+            c.region
         FROM constituencies c
         LEFT JOIN MSPs m ON c.name=m.constituency
         LEFT JOIN datazones d ON c.id = d.constituency
@@ -110,13 +113,16 @@ def const_info(constituency):
             'rank_hea': row[17],
             'rank_hou': row[18],
             'rank_inc': row[19],
-            'population': row[20]
+            'population': row[20],
+            'constituency': row[21],
+            'council': row[22],
+            'region': row[23]
         }
 
         result += [msp]
         row = r.fetch_row()
 
-    result = {'result':result}
+    result = {'result': result}
 
     with open("/var/www/ilwhack/testapp/static/cache/c_"+secure_filename(constituency),"w") as fo:
         fo.write(json.dumps(result))
@@ -144,13 +150,14 @@ def region_info(constituency):
             m.percentage_of_interventions_with_mention,
             m.id,
             GROUP_CONCAT(DISTINCT CONCAT("[\\\"", w.word, "\\\",", w.weight, "]") SEPARATOR ', '),
-            r.region
+            c.name,
+            c.council,
+            c.region
         FROM constituencies c
-        LEFT JOIN constituencies_regions r ON c.id = r.id
-        LEFT JOIN MSPs m ON r.region=m.constituency
+        LEFT JOIN MSPs m ON c.region=m.constituency
         LEFT JOIN MSP_words w ON w.MSP_id = m.id
-        LEFT JOIN constituencies_regions r2 ON c.id = r2.id
-        LEFT JOIN datazones d ON r2.id = d.constituency
+        LEFT JOIN constituencies c2 ON c.id = c2.id
+        LEFT JOIN datazones d ON c2.id = d.constituency
         LEFT JOIN simd_general s_gen on s_gen.datazone = d.code
         WHERE c.name="{constituency}"
         GROUP BY m.id
@@ -175,7 +182,9 @@ def region_info(constituency):
             'mentions_percentage_of_total_text': row[9],
             'percentage_of_interventions_with_mention': row[10],
             'words': "[{0}]".format(row[12]),
-            'region': row[13]
+            'constituency': row[13],
+            'council': row[14],
+            'region': row[15]
         }
 
         result += [msp]
@@ -197,7 +206,7 @@ def get_stats():
         return cache
 
     categories = request.form.getlist('categories[]')
-    fields = {'c_id':'c.id', 'c_name':'c.name'}
+    fields = {'c_id':'c.id', 'c_name':'c.name', 'c_council':'c.council', 'c_region':'c.region'}
 
     if ("rank_gen" in categories) or (len(categories)==0):
         fields['rank_gen']="(AVG(s_gen.2006*1+s_gen.2009*2+s_gen.2012*7)/6505*10-18)/67*100 AS rank_gen"
