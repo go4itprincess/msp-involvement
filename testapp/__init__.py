@@ -66,7 +66,8 @@ def const_info(constituency):
             (AVG(s_geo.2006*1+s_geo.2009*2+s_geo.2012*7)/6505*10-11)/77*100 AS rank_geo,
             (AVG(s_hea.2006*1+s_hea.2009*2+s_hea.2012*7)/6505*10-17)/63*100 AS rank_hea,
             (AVG(s_hou.2006*1+s_hou.2009*2+s_hou.2012*7)/6505*10-9)/67*100 AS rank_hou,
-            (AVG(s_inc.2006*1+s_inc.2009*2+s_inc.2012*7)/6505*10-18)/62*100 AS rank_inc
+            (AVG(s_inc.2006*1+s_inc.2009*2+s_inc.2012*7)/6505*10-18)/62*100 AS rank_inc,
+            c.population
         FROM constituencies c
         LEFT JOIN MSPs m ON c.name=m.constituency
         LEFT JOIN datazones d ON c.id = d.constituency
@@ -108,7 +109,8 @@ def const_info(constituency):
             'rank_geo': row[14],
             'rank_hea': row[15],
             'rank_hou': row[16],
-            'rank_inc': row[18]
+            'rank_inc': row[18],
+            'population': row[19]
         }
 
         result += [msp]
