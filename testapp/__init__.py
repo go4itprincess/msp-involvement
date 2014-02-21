@@ -39,6 +39,10 @@ def get_json(filename):
 def get_ico(filename):
     return app.send_static_file(filename + '.ico')
 
+@app.route("/<filename>.png")
+def get_ico(filename):
+    return app.send_static_file(filename + '.png')
+
 @app.route("/constituency/<string:constituency>")
 def const_info(constituency):
     cache = check_cache("c_"+secure_filename(constituency))
