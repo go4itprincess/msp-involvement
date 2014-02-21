@@ -159,3 +159,7 @@ h4 {
 	vertical-align: text-bottom;
 	bottom: -15px;
 }
+
+#bar-containers{
+	width:500px;
+}
