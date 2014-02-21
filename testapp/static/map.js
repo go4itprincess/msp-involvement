@@ -134,7 +134,7 @@ function paintLightBox() {
         // url:"/example.json",
         success: function(result) {
             // console.log(result);
-            data=JSON.parse(result).result;
+            data=result.result;
             // console.log(data);
             content="<div class='constdiv'>"+ barHTML(window.currentData.result[0], window.currentData.result[0].region)+
             "</div>";
@@ -159,7 +159,7 @@ function paintLightBox() {
             words=JSON.parse(window.currentData.result[0].words);
             paintTagCloud("#msp1", words);
 
-            console.log(data);
+            // console.log(data);
             for (cnt=0;cnt < (data.length+1); cnt++){
                 // words=data[cnt].words;
                 words=JSON.parse(data[cnt].words);
@@ -171,7 +171,7 @@ function paintLightBox() {
             var left = ($(window).width() / 2) - ($(".fancybox-wrap").outerWidth() / 2);
             $(".fancybox-wrap").css({ top: top, left: left});
             var height=$(".fancybox-wrap").outerHeight()-20;
-            console.log(height);
+            // console.log(height);
             $(".mpsdiv").css({"height": height});
         }).trigger('resize');
 
@@ -285,13 +285,13 @@ function highlightFeature(e) {
         url:"/constituency/" + constituency,
         success: function(result) {
             // console.log(result);
-            result=JSON.parse(result);
+//            result=JSON.parse(result);
             info.update(result, constituency);
             window.currentData=result;
 
         },
         error: function() {
-            console.log("ERROR LOADING CONSTITUENCY DATA");
+            // console.log("ERROR LOADING CONSTITUENCY DATA");
             // info.update(request_data, constituency); //test purposes
         }
     });

@@ -12,7 +12,7 @@ $.getJSON("constituencies_geometry.js", function (data) {
     constituencies = data;
 
     for(var i = 0; i<Object.keys(constituencies).length; i++){
-        console.log([constituencies[i].geometry.centre_lat, constituencies[i].geometry.centre_lon], constituencies[i].population);
+        // console.log([constituencies[i].geometry.centre_lat, constituencies[i].geometry.centre_lon], constituencies[i].population);
         circle[i] = L.circle([constituencies[i].geometry.centre_lat, constituencies[i].geometry.centre_lon], constituencies[i].population/10, {
             color: 'red',
             fillColor: '#f03',

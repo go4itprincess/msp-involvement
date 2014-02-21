@@ -33,13 +33,13 @@
 // layer=map.addLayer(new MyCustomLayer(latlng));
 
 var canvasTiles = L.tileLayer.canvas(/*{"tileSize":2000}*/);
-console.log("wordcloud.js");
+// console.log("wordcloud.js");
 
 canvasTiles.drawTile = function(canvas, tilePoint, zoom) {
     var ctx = canvas.getContext('2d');
     ctx.font = "20pt Arial";
     ctx.fillText("Sample String", 10, 50);
-    console.log("painted");
+   // console.log("painted");
     // draw something on the tile canvas
 
 }
