@@ -212,7 +212,7 @@ h4 {
 #aboutbox{
 	font-family: "Open Sans", Arial, Verdana;
 	text-align: center;
-	padding-left: 20px;
+	padding: 20px;
 }
 
 .abouttext{

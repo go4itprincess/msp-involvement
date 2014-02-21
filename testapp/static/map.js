@@ -194,6 +194,7 @@ function setAbout(){
                     // wrapCSS    : 'fancybox-custom',
                     closeClick : true,
                     openEffect : 'elastic',
+                    closeEffect : 'elastic',
                     // autoSize: false,
                     // width: "500px",
                     // height: "400px",
