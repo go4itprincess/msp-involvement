@@ -1,18 +1,22 @@
+import json
 from flask import Flask, jsonify, request
 import _mysql
 import os
 from os.path import join, getsize
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
 # DB connection
 db = _mysql.connect(host="d33028.mysql.zone.ee", user="d33028sa73662", passwd="Hackath0n", db="d33028sd72729")
+db.query("SET SESSION group_concat_max_len=8192;")
 
-def checkCache(name):
-    cache = name
-    if cache == 'Ayr':
-        return True
-    else:
+
+def check_cache(name):
+    try:
+        with open("/var/www/ilwhack/testapp/static/cache/"+name,"r") as fo:
+            return fo.read()
+    except IOError:
         return False
 
 @app.route("/")
@@ -37,8 +41,9 @@ def get_ico(filename):
 
 @app.route("/constituency/<string:constituency>")
 def const_info(constituency):
-    # if checkCache(constituency):
-    #     return app.send_static_file('cache/' + constituency)
+    cache = check_cache("c_"+secure_filename(constituency))
+    if cache != False:
+        return cache
 
     db.query("""
         SELECT
@@ -110,17 +115,17 @@ def const_info(constituency):
         row = r.fetch_row()
 
     result = {'result':result}
-    result = jsonify(result)
 
-    # with open("cache/c_"+constituency,"wb") as fo:
-    #     fo.write(result)
+    with open("/var/www/ilwhack/testapp/static/cache/c_"+secure_filename(constituency),"w") as fo:
+        fo.write(json.dumps(result))
 
-    return result
+    return jsonify(result)
 
 @app.route("/region/<string:constituency>")
 def region_info(constituency):
-    # if checkCache(constituency):
-    #     return app.send_static_file('cahce/' + constituency)
+    cache = check_cache("r_"+secure_filename(constituency))
+    if cache != False:
+        return cache
 
     db.query("""
         SELECT
@@ -175,18 +180,20 @@ def region_info(constituency):
         row = r.fetch_row()
 
     result = {'result':result}
-    result = jsonify(result)
 
-    # with open("cache/r_"+constituency,"wb") as fo:
-    #
-    #     fo.write(result)
+    with open("/var/www/ilwhack/testapp/static/cache/r_"+secure_filename(constituency),"w") as fo:
+        fo.write(json.dumps(result))
 
-    return result
+    return jsonify(result)
 
 
 @app.route("/stats/", methods=['POST', 'GET'])
 def get_stats():
-    print(request.form.getlist('categories[]'))
+
+    cache = check_cache("stats")
+    if cache != False:
+        return cache
+
     categories = request.form.getlist('categories[]')
     fields = {'c_id':'c.id', 'c_name':'c.name'}
 
@@ -263,6 +270,10 @@ def get_stats():
         row = r.fetch_row()
 
     result = {'result':result}
+
+    with open("/var/www/ilwhack/testapp/static/cache/stats","w") as fo:
+        fo.write(json.dumps(result))
+
     return jsonify(result)
 
 
