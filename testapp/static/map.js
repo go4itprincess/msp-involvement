@@ -134,7 +134,7 @@ function paintLightBox() {
         // url:"/example.json",
         success: function(result) {
             // console.log(result);
-            data=JSON.parse(result).result;
+            data=result.result;
             // console.log(data);
             content="<div class='constdiv'>"+ barHTML(window.currentData.result[0], window.currentData.result[0].region)+
             "</div>";
@@ -285,7 +285,7 @@ function highlightFeature(e) {
         url:"/constituency/" + constituency,
         success: function(result) {
             // console.log(result);
-            result=JSON.parse(result);
+//            result=JSON.parse(result);
             info.update(result, constituency);
             window.currentData=result;
 
