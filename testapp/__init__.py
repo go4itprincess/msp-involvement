@@ -178,6 +178,7 @@ def region_info(constituency):
     result = jsonify(result)
 
     # with open("cache/r_"+constituency,"wb") as fo:
+    #
     #     fo.write(result)
 
     return result
