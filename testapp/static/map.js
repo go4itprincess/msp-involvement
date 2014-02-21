@@ -49,7 +49,8 @@ var map = L.map('map', {
 map.setMaxBounds(L.latLngBounds(L.latLng(50.0,-20.0),L.latLng(65.0,15.0)));
 
 // add an OpenStreetMap tile layer
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: ' Data from: <a href="http://www.theyworkforyou.com/">TheyWorkForYou</a>, <a href="http://www.sns.gov.uk/">SNS</a> and <a href="http://mapit.mysociety.org/">MapIt</a> | &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', 
+    {attribution: ' Data from: <a href="http://www.theyworkforyou.com/">TheyWorkForYou</a>, <a href="http://www.sns.gov.uk/">SNS</a> and <a href="http://mapit.mysociety.org/">MapIt</a> | &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors | <b><a href="#aboutbox" class ="aboutlightbox">About</a></b>'
 }).addTo(map);
 
 
@@ -186,6 +187,30 @@ function paintLightBox() {
 
 }
 
+
+function setAbout(){
+
+        $(".aboutlightbox").fancybox({
+                    // wrapCSS    : 'fancybox-custom',
+                    closeClick : true,
+                    openEffect : 'elastic',
+                    autoSize: false,
+                    width: "500px",
+                    height: "400px",
+                    scrolling: "no",
+                    helpers : {
+                    title : {
+                        type : 'inside'
+                    },
+                    overlay : {
+                        css : {
+                            'background' : 'rgba(238,238,238,0.65)'
+                        }
+                    }
+                }
+
+                });
+}
 
 // control that shows state info on hover
 var InfoControl = L.Control.extend({

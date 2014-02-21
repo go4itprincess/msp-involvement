@@ -208,3 +208,15 @@ h4 {
 	font-weight: 400;
 	display: block;
 }
+
+#aboutbox{
+	font-family: "Open Sans", Arial, Verdana;
+	text-align: center;
+	padding-left: 20px;
+}
+
+.abouttext{
+	display: block;
+	padding-bottom: 20px;
+
+}
