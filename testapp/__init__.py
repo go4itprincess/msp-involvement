@@ -185,7 +185,7 @@ def region_info(constituency):
             'words': "[{0}]".format(row[12]),
             'constituency': row[13],
             'council': row[14],
-            'region': row[15]
+            'region': row[15],
             'population': row[16]
         }
 
