@@ -89,7 +89,7 @@ def const_info(constituency):
     while row:
         row = row[0]
         msp = {
-            'MSPfsdfsd_id': row[11],
+            'MSP_id': row[11],
             'name': row[0],
             'surname': row[1],
             'party': row[2],
