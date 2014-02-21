@@ -201,7 +201,6 @@ var InfoControl = L.Control.extend({
     },
 
     update: function (results, constituency) {
-console.log(results)
         if (results) {
             sel_constituency = results;
 
