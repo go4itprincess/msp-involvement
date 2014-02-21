@@ -25,7 +25,7 @@ def extract(name):
             return {
                 'rank_gen': c["rank_gen"],
                 'rank_cri': c["rank_cri"],
-                'rank_ed': c["rank_ed"],
+                'rank_ed': c["rank_edu"],
                 'rank_emp': c["rank_emp"],
                 'rank_geo': c["rank_geo"],
                 'rank_hea': c["rank_hea"],
@@ -79,7 +79,7 @@ for constituency in constituencies.values():
         pointsList.append([points])
     multipolygon = geojson.MultiPolygon(coordinates=pointsList)
     ranks = extract(name)
-    ranks["population"] = 100 - (float(pop) / 1000)
+    ranks["population"] = (float(pop) / 1000)
     feature = geojson.Feature(id=id, geometry=multipolygon, properties={'name': name, 'ranks': ranks})
     feature_list.append(feature)
 feature_collection = geojson.FeatureCollection(features=feature_list)
