@@ -217,3 +217,25 @@ function onEachFeature(feature, layer) {
     });
 }
 
+// control that shows state info on hover
+var legendPanel = L.Control.extend({
+
+    options: {
+        position: 'bottomright'
+    },
+
+    onAdd: function (map) {
+        this._div = L.DomUtil.create('div', 'legend');
+        this._div.innerHTML =
+            "<div id=\"gradient\"></div>" +
+            "<div id=\"legendMaxMin\">" +
+            "<p id=\"max\">Max</p>" +
+            "<p id=\"min\">Min</p>" +
+            "</div>"
+        return this._div;
+    }
+});
+
+var legend = new legendPanel();
+
+map.addControl(legend);

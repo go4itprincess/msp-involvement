@@ -81,8 +81,15 @@ body {
 	height: 100%;
 	}
 
+#buttons-holder{
+	margin: 0 auto;
+	position: relative;
+	width: 100%;
+}
+
 #buttons {
-    margin-left: 80px;
+    padding: 0px 40px;
+    width: 100%;
     z-index: 100;
     position: absolute;
     align:top;
@@ -106,7 +113,49 @@ h4 {
 	font-size: 16px ;
 	font-weight: 300;
 	background: white;
-	background: rgba(255,255,255,0.8);
+	background: rgba(255,255,255,0.7);
 	box-shadow: 0 0 15px rgba(0,0,0,0.2);
 	border-radius: 5px;
+}
+
+.legend {
+	padding: 4px 14px;
+	font-family: "Open Sans", Arial, Helvetica, sans-serif;
+	font-size: 16px ;
+	font-weight: 300;
+	background: white;
+	background: rgba(255,255,255,0.7);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 5px;
+}
+
+#gradient
+{
+	float:left;
+	background: -webkit-linear-gradient(rgba(0,255,0,0.6), rgba(51,255,0,0.6), rgba(102,255,0,0.6), rgba(153,255,0,0.6), rgba(204,255,0,0.6), rgba(255,255,0,0.6), rgba(255,204,0,0.6), rgba(255,153,0,0.6), rgba(255,102,0,0.6), rgba(255,51,0,0.6), rgba(255,0,0,0.6)); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(rgba(0,255,0,0.6), rgba(51,255,0,0.6), rgba(102,255,0,0.6), rgba(153,255,0,0.6), rgba(204,255,0,0.6), rgba(255,255,0,0.6), rgba(255,204,0,0.6), rgba(255,153,0,0.6), rgba(255,102,0,0.6), rgba(255,51,0,0.6), rgba(255,0,0,0.6)); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(rgba(0,255,0,0.6), rgba(51,255,0,0.6), rgba(102,255,0,0.6), rgba(153,255,0,0.6), rgba(204,255,0,0.6), rgba(255,255,0,0.6), rgba(255,204,0,0.6), rgba(255,153,0,0.6), rgba(255,102,0,0.6), rgba(255,51,0,0.6), rgba(255,0,0,0.6)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(rgba(0,255,0,0.6), rgba(51,255,0,0.6), rgba(102,255,0,0.6), rgba(153,255,0,0.6), rgba(204,255,0,0.6), rgba(255,255,0,0.6), rgba(255,204,0,0.6), rgba(255,153,0,0.6), rgba(255,102,0,0.6), rgba(255,51,0,0.6), rgba(255,0,0,0.6)); /* Standard syntax */
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 5px;
+	width:15px;
+	height:100px;
+}
+
+#legendMaxMin{
+	float: right;
+}
+
+#max{
+	padding: 0 0 0 13px;
+	position:relative;
+	vertical-align: text-top;
+	top: -15px;
+}
+
+#min{
+	padding: 0 0 0 13px;
+	position:relative;
+	vertical-align: text-bottom;
+	bottom: -15px;
 }
