@@ -66,7 +66,7 @@ var geojson = L.geoJson(constituencies, {
  var tagYsize=200;
  var drawTagCloudOn=0;
  var currentArea=0;  // Stores the area that we most recently hovered over
- var currentData=0;  // Stores the area that we most recently hovered over
+window.currentData=0;  // Stores the area that we most recently hovered over
  var currentConstituency=0; // Stores the name of the constituency that we most recently hovered over
 
  
@@ -96,9 +96,10 @@ var geojson = L.geoJson(constituencies, {
   }
 
 
-function htmlForMSP(data) {
+function htmlForMSP(data,region) {
     // <span style='padding-left:12px;'>
-        res="<span class='infotext'> MSP "+data.name+" "+data.surname+"</span>"+
+        res="<span class='mspname'> MSP "+data.name+" "+data.surname+"</span>"+
+        "<span class='infotext'>("+region+")</span>"+
         "<span class='infotext'> Total interventions: "+data.total_interventions+"</span>"+
         "<span class='infotext'> Average words spoken: "+data.avg_intervention_len+"</span>"+
         // "<span class='infotext'> total_mentions_of_constituency: "+data.total_mentions_of_constituency+"</span>"+
@@ -129,32 +130,40 @@ function paintLightBox() {
     window.lightbox=this;
 
     $.ajax({
-        // url:"/region/" + constituency,
-        url:"/example.json",
+        url:"/region/" + constituency,
+        // url:"/example.json",
         success: function(result) {
             // console.log(result);
             data=JSON.parse(result).result;
             // console.log(data);
-            content="<div class='constdiv'>fasdfasdfasdfasd fasdfasdfasfas dfasdfasdfaf saf asdfasdfasd</div>";
+            content="<div class='constdiv'>"+ barHTML(window.currentData.result[0], window.currentData.result[0].region)+
+            "</div>";
 
-            content+="<div class='mpsdiv'><h4>"+constituency+"</h4>";
+            content+="<div class='mpsdiv'>"
+
+            content=content+
+            "<div id=msp1 class='persondiv'>"+
+            htmlForMSP(window.currentData.result[0],window.currentData.result[0].party+", "+currentConstituency) +
+            "</div>";
 
             for (cnt=0; cnt < data.length; cnt++){
                 content=content+
-                "<div id=msp"+(cnt+1)+">"+
-                htmlForMSP(data[cnt]) +
+                "<div id=msp"+(cnt+2)+"  class='persondiv'>"+
+                htmlForMSP(data[cnt],data[cnt].party+", "+data[cnt].region) +
                 "</div>";
             }
             content+="</div>";
 
             window.lightbox.inner.append(content);
 
-            for (cnt=0;cnt < data.length; cnt++){
-                // console.log(data[cnt].words);
-                console.log(data[cnt].words.length);
-                words=JSON.parse(data[cnt].words);
+            words=JSON.parse(window.currentData.result[0].words);
+            paintTagCloud("#msp1", words);
 
-                paintTagCloud("#msp"+cnt, words);
+            console.log(data);
+            for (cnt=0;cnt < (data.length+1); cnt++){
+                // words=data[cnt].words;
+                words=JSON.parse(data[cnt].words);
+                paintTagCloud("#msp"+(cnt+2), words);
             }
 
             $(window).bind('resize', function() {
@@ -194,13 +203,12 @@ var InfoControl = L.Control.extend({
         if (results) {
         sel_constituency = results;
 
-         // console.log(sel_constituency.result[0].words);
-         // console.log(results);
-         words=JSON.parse(sel_constituency.result[0].words);
+
+        words=JSON.parse(sel_constituency.result[0].words);
 
         this._div.innerHTML =
         "<div id=msp1><h4>"+constituency+"</h4>" +
-        htmlForMSP(sel_constituency.result[0]) +
+        htmlForMSP(sel_constituency.result[0],sel_constituency.result[0].party) +
         "</div>";
         paintTagCloud("#msp1", words);
 
@@ -253,7 +261,7 @@ function highlightFeature(e) {
                     openEffect : 'elastic',
                     closeEffect: 'elastic',
                     autoSize: false,
-                    width: "980px",
+                    width: "970px",
                     height: "500px",
                     scrolling: "no",
 
@@ -273,14 +281,18 @@ function highlightFeature(e) {
 
 
     $.ajax({
+        // url:"/example2.json",
         url:"/constituency/" + constituency,
         success: function(result) {
+            // console.log(result);
+            result=JSON.parse(result);
             info.update(result, constituency);
-            currentData=result;
+            window.currentData=result;
 
         },
         error: function() {
-            info.update(request_data, constituency); //test purposes
+            console.log("ERROR LOADING CONSTITUENCY DATA");
+            // info.update(request_data, constituency); //test purposes
         }
     });
 }
@@ -325,3 +337,47 @@ var legendPanel = L.Control.extend({
 var legend = new legendPanel();
 
 map.addControl(legend);
+
+
+
+var barWidth = 200;
+
+var bar = function(num) {
+    return '<div style="float:right; width:' + barWidth + 'px; height:15px;"><div style="opacity:0.9; background-color:' + getColorForPercentage(num/100) + '; height:15px; width:' + Math.floor(barWidth*num/100) + 'px; box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px;"></div></div>'
+}
+
+function barHTML(data,region){
+
+res ="<span class='infotitle'>" + currentConstituency + " </span>" +
+    "<span class='bartext'>(Region of " + region + ")</span><br/><br/>" +
+    '<div class="bar-containers">' +
+        '<span class="bartext">Population</span>' + '<div style="float:right; width:' + barWidth + 
+        'px; height:15px;"><div class=infotext style="float:left;">' + data.population+ '</div></div>' +
+    '</div>' + 
+    '<div class="bar-containers">' +
+        '<span class="bartext">Overall</span>' + bar(data.rank_gen) +
+    '</div>' + 
+    '<div class="bar-containers">' +
+        '<span class="bartext">Crime</span>' + bar(data.rank_cri) +
+    '</div>' + 
+    '<div class="bar-containers">' +
+        '<span class="bartext">Access</span>' + bar(data.rank_geo) +
+    '</div>' + 
+    '<div class="bar-containers">' +
+        '<span class="bartext">Housing</span>' + bar(data.rank_hou) +
+    '</div>' + 
+    '<div class="bar-containers">' +
+        '<span class="bartext">Education</span>' + bar(data.rank_edu) +
+    '</div>' + 
+    '<div class="bar-containers">' +
+        '<span class="bartext">Health</span>' + bar(data.rank_hea) +
+    '</div>' + 
+    '<div class="bar-containers">' +
+        '<span class="bartext">Employement</span>' + bar(data.rank_emp) +
+    '</div>' + 
+    '<div class="bar-containers">' +
+        '<span class="bartext">Income</span>' + bar(data.rank_inc) +
+    '</div>';
+
+    return res;
+}

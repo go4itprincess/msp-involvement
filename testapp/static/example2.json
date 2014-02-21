@@ -1,0 +1,30 @@
+{
+  "result": [
+    {
+      "surname": " Scott", 
+      "total_mentions_of_constituency": "723", 
+      "council": "South Ayrshire", 
+      "rank_cri": "58.156795503630", 
+      "rank_inc": "55.855710660946", 
+      "rank_hea": "47.501275683216", 
+      "rank_emp": "50.855809952432", 
+      "interventions_with_mention": "236", 
+      "total_interventions": "1661", 
+      "rank_hou": "86.676780226010", 
+      "party": "Scottish Conservative and Unionist Party", 
+      "percentage_of_interventions_with_mention": "0.14208", 
+      "words": "[[\"business\",0.294303], [\"ayrshire\",0.210456], [\"support\",0.187398], [\"food\",0.174821], [\"local\",0.152602], [\"today\",0.132059], [\"water\",0.129963], [\"work\",0.12619], [\"executive\",0.124094], [\"future\",0.122417], [\"item\",0.12032], [\"public\",0.108163], [\"farmers\",0.105228], [\"development\",0.104389], [\"rural\",0.103551], [\"land\",0.103132], [\"industry\",0.101874], [\"given\",0.0968433], [\"national\",0.0947471], [\"ayr\",0.0922317], [\"environment\",0.0897163], [\"uk\",0.089297], [\"areas\",0.0851047], [\"energy\",0.0834277], [\"problem\",0.0796546], [\"followed\",0.0737853], [\"health\",0.0737853], [\"notes\",0.0737853], [\"waste\",0.0737853], [\"services\",0.0725276], [\"world\",0.0679161], [\"proposals\",0.0670776], [\"south\",0.0670776], [\"funding\",0.0654006], [\"scheme\",0.0645622], [\"questions\",0.0637237], [\"view\",0.0637237], [\"policy\",0.0620468], [\"production\",0.0620468], [\"forward\",0.0607891], [\"problems\",0.0607891], [\"particularly\",0.0599506], [\"service\",0.0595314], [\"address\",0.0591121], [\"change\",0.0586929], [\"cost\",0.0586929], [\"management\",0.0586929], [\"possible\",0.0582737], [\"farming\",0.0578544], [\"glasgow\",0.0578544]]", 
+      "mentions_percentage_of_total_text": "0.00322376", 
+      "population": "76884", 
+      "avg_intervention_len": "133.768", 
+      "name": "John", 
+      "url": "http://www.scottish.parliament.uk/images/MSPs and office holders Session 4/JohnScottMSP20110509.JPG", 
+      "MSP_id": "14091", 
+      "rank_gen": "53.637023545291", 
+      "constituency": "Ayr", 
+      "rank_geo": "53.722793009314", 
+      "region": "South Scotland", 
+      "rank_edu": "51.625833456551"
+    }
+  ]
+}
