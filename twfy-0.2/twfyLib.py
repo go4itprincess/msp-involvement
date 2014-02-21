@@ -244,6 +244,7 @@ def computeMSPStats(msps):
         stats["total_mentions_of_constituency"], stats["interventions_with_mention"]=countMentionsOfConstituency(msp,debate)
         stats["mentions_percentage_of_total_text"]=countMentionsOf(text,msp["constituency"].lower()) / float(interventionLength2(text))
         stats["percentage_of_interventions_with_mention"]=stats["interventions_with_mention"] / float(stats["total_interventions"])
+        stats["percentage_of_interventions_with_mention"]=stats["interventions_with_mention"] / float(stats["total_interventions"])
         msp["stats"]=stats
 
 ##        info["interventions_with_mentions_of_constituency"]=

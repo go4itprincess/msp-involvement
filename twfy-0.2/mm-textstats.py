@@ -69,7 +69,8 @@ STOP_WORDS = frozenset([
     "who", "whoever", "whole", "whom", "whose", "why", "will", "with",
     "within", "without", "would", "yet", "you", "your", "yours", "yourself",
     "yourselves"
-    ,"scotland", "scottish", "people", "member", "members", "said",
+    ,"scotland", "scottish"
+    ,"people", "member", "members", "said", "motion", "motions",
     "government", "committee", "important", "know", "way", "ensure", "years",
     "legislation", "amendment", "think", "million", "report",
     "minister","law", "bill", "believe", "welcome", "fact", "simply", "want",
@@ -92,7 +93,8 @@ STOP_WORDS = frozenset([
     "chances", "concentrate", "agreed", "question", "explicitly", "showed", "range",
     "including", "excluding", "short", "long", "afternoon", "morning", "night",
     "pointed", "effect", "certain", "approach", "listing", "rapidly", "slowly",
-    "appearing", "commits", "intent", "existence", "spuriously"
+    "appearing", "commits", "intent", "existence", "spuriously",
+    "draft"
      ])
 
 
@@ -115,20 +117,21 @@ def loadObject(filename):
 def loadTextDocs(dir):
     MAX_WORDS=50
     tfidf_vectorizer = TfidfVectorizer(decode_error="replace", stop_words=STOP_WORDS)
+##    tfidf_vectorizer = TfidfVectorizer(decode_error="replace")
 
     all_speakers=[]
 
-    for fn in glob.glob(dir+"*.txt"):
-##    for msp in msps_constituencies[:50]:
-##        fn=dir+str(msp)+".txt"
-        print "Loading ", fn
-        f=codecs.open(fn,"rb","utf-8", errors="replace")
-        lines2=[]
-        lines=f.readlines()
-        for l in lines:
-            lines2.append(re.sub(r"\d+(m|gwh|km)?.\s?"," ",l,0,re.IGNORECASE))
-        f.close()
-        vec = tfidf_vectorizer.fit_transform(lines2)
+##    for fn in glob.glob(dir+"*.txt"):
+####    for msp in msps_constituencies[:50]:
+####        fn=dir+str(msp)+".txt"
+##        print "Loading ", fn
+##        f=codecs.open(fn,"rb","utf-8", errors="replace")
+##        lines2=[]
+##        lines=f.readlines()
+##        for l in lines:
+##            lines2.append(re.sub(r"\d+(m|gwh|km)?.\s?"," ",l,0,re.IGNORECASE))
+##        f.close()
+####        vec = tfidf_vectorizer.fit_transform(lines2)
 ##        vec = tfidf_vectorizer.fit_transform([" ".join(lines2)])
 
     for fn in glob.glob(dir+"*.txt"):
@@ -141,8 +144,8 @@ def loadTextDocs(dir):
         for l in lines:
             lines2.append(re.sub(r"\d+(m|gwh|km)?.\s?"," ",l,0,re.IGNORECASE))
         f.close()
-        vec = tfidf_vectorizer.fit_transform(lines2).toarray().ravel()
-##        vec = tfidf_vectorizer.fit_transform([" ".join(lines2)]).toarray().ravel()
+##        vec = tfidf_vectorizer.fit_transform(lines2).toarray().ravel()
+        vec = tfidf_vectorizer.fit_transform([" ".join(lines2)]).toarray().ravel()
 
         names=np.array(tfidf_vectorizer.get_feature_names())
         scores=zip(names,vec)

@@ -104,7 +104,15 @@ h4 {
 }
 
 .infotext{
+	font-family: "Open Sans", Arial, Helvetica, sans-serif;
 	padding-bottom: 4px;
+	display: block;
+}
+
+.mspname{
+	font-family: "Open Sans", Arial, Helvetica, sans-serif;
+	padding-bottom: 4px;
+	font-weight: bold;
 	display: block;
 }
 
@@ -162,5 +170,41 @@ h4 {
 }
 
 .bar-containers{
-	width:500px;
+	width:340px;
+}
+
+.mpsdiv {
+	float:right;
+	overflow-y: scroll;
+	overflow-x: none;
+	height: 99%;
+	/*width: 60%;*/
+}
+
+.constdiv {
+	/*float:left;*/
+	overflow-y: none;
+	overflow-x: none;
+	/*border-right: thin solid #bbbbbb;*/
+	width: 350px;
+	float: left;
+	vertical-align: middle;
+}
+
+.bartext{
+	width:150px;
+	font-family: "Open Sans", Arial, Verdana;
+}
+
+.persondiv{
+	padding-bottom: 10px;
+	border-bottom: thin solid #bbb;
+}
+
+.infotitle{
+	font-family: "Open Sans", Arial, Verdana;
+	font-size: 16px;
+	/*padding-bottom: 10px;*/
+	font-weight: 400;
+	display: block;
 }
