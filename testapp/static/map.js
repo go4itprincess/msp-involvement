@@ -243,7 +243,7 @@ var InfoControl = L.Control.extend({
             paintTagCloud("#msp1", words);
 
         } else {
-            this._div.innerHTML = "<p>Hover over a constituency.</p>";
+            this._div.innerHTML = "<p>Hover over a constituency, click it for more details.</p>";
         }
 
     }
