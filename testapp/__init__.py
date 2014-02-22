@@ -14,7 +14,7 @@ db.query("SET SESSION group_concat_max_len=8192;")
 
 def check_cache(name):
     try:
-        with open("/var/www/ilwhack/testapp/static/cache/"+name,"r") as fo:
+        with open("/var/www/msp/live/testapp/static/cache/"+name,"r") as fo:
             return fo.read()
     except IOError:
         return False
@@ -128,7 +128,7 @@ def const_info(constituency):
 
     result = {'result': result}
 
-    with open("/var/www/ilwhack/testapp/static/cache/c_"+secure_filename(constituency),"w") as fo:
+    with open("/var/www/msp/live/testapp/static/cache/c_"+secure_filename(constituency),"w") as fo:
         fo.write(json.dumps(result))
 
     return jsonify(result)
@@ -198,7 +198,7 @@ def region_info(constituency):
 
     result = {'result':result}
 
-    with open("/var/www/ilwhack/testapp/static/cache/r_"+secure_filename(constituency),"w") as fo:
+    with open("/var/www/msp/live/testapp/static/cache/r_"+secure_filename(constituency),"w") as fo:
         fo.write(json.dumps(result))
 
     return jsonify(result)
@@ -288,7 +288,7 @@ def get_stats():
 
     result = {'result':result}
 
-    with open("/var/www/ilwhack/testapp/static/cache/stats","w") as fo:
+    with open("/var/www/msp/live/testapp/static/cache/stats","w") as fo:
         fo.write(json.dumps(result))
 
     return jsonify(result)
