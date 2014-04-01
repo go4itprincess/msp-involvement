@@ -40,7 +40,7 @@ def get_ico(filename):
     return app.send_static_file(filename + '.ico')
 
 @app.route("/<filename>.png")
-def get_ico(filename):
+def get_png(filename):
     return app.send_static_file(filename + '.png')
 
 @app.route("/constituency/<string:constituency>")
