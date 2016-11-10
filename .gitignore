@@ -4,6 +4,6 @@
 /*.js~
 /*.html~
 /*.css~
-/*.pyc
+*.pyc
 /twfy-0.2/twfy/__pycache__
-/testapp/__init__.pyc
+/testapp/db_connect.py
